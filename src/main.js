@@ -23,7 +23,8 @@ router.beforeEach((to, from, next) => {
   if (target != manager.controller.currentApp) {
     manager.controller.currentApp = target
     next()
-  } else {
+  }
+  else {
     next()
   }
 })

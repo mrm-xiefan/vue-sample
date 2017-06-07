@@ -22,51 +22,50 @@ let mimeTypes = {
 // let uploadService = require('./uploadService.js').uploadService
 // let utils = require('./utils').utils
 
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'))
 })
 
-router.get('/img/*', function(req, res, next) {
+router.get('/img/*', function (req, res, next) {
   req.url = req.url.replace('/img/', '/static/img/')
   returnResourceFile(req, res)
 })
-router.get('/css/*', function(req, res, next) {
+router.get('/css/*', function (req, res, next) {
   req.url = req.url.replace('/css/', '/dist/static/css/')
   returnResourceFile(req, res)
 })
-router.get('/js/*', function(req, res, next) {
+router.get('/js/*', function (req, res, next) {
   req.url = req.url.replace('/js/', '/dist/static/js/')
   returnResourceFile(req, res)
 })
 
-// router.get('/sub/lib/*', function(req, res, next) {
+// router.get('/sub/lib/*', function (req, res, next) {
 //   req.url = req.url.replace('/sub/', '/')
 //   returnResourceFile(req, res)
 // })
-// router.get('/sub/img/*', function(req, res, next) {
+// router.get('/sub/img/*', function (req, res, next) {
 //   req.url = req.url.replace('/sub/', '/')
 //   returnResourceFile(req, res)
 // })
-// router.get('/sub/css/*', function(req, res, next) {
+// router.get('/sub/css/*', function (req, res, next) {
 //   req.url = req.url.replace('/sub/', '/')
 //   returnResourceFile(req, res)
 // })
-// router.get('/sub/js/*', function(req, res, next) {
+// router.get('/sub/js/*', function (req, res, next) {
 //   req.url = req.url.replace('/sub/', '/')
 //   returnResourceFile(req, res)
 // })
 
-router.get('/api/getData', function(req, res, next) {
+router.get('/api/getData', function (req, res, next) {
   let url_parts = url.parse(req.url, true)
 //   let name = url_parts.query.name
 //   console.log('getData:' + name)
   console.log('getData')
 
-  res.setHeader('Acces-Control-Allow-Origin', '*')
-  res.json({error: null, data: {msg: "mmmm"}})
+  res.json({error: null, data: {name: "mmmm"}})
 })
 
-function returnResourceFile(req, res) {
+function  returnResourceFile(req, res) {
   let publicDirectory = fs.realpathSync('static')
   let decodedUri = decodeURI(req.url)
   let fileFullPathArray = path.join(publicDirectory, decodedUri).split('?')
@@ -76,19 +75,21 @@ function returnResourceFile(req, res) {
   if (req.headers['if-none-match'] === etag) {
     res.writeHead(304)
     res.end()
-  } else {
+  }
+  else {
     let ext = path.extname(path.basename(decodedUri).split('?')[0])
     let mimeType = 'application/octet-stream'
     if (mimeTypes[ext]) {
       mimeType = mimeTypes[ext]
     }
-    fs.exists(fileFullPath, function(exists) {
+    fs.exists(fileFullPath, function (exists) {
       if (exists) {
-        fs.readFile(fileFullPath, function(err, data) {
+        fs.readFile(fileFullPath, function (err, data) {
           if (err) {
             res.writeHead(500)
             res.end('Internal Server Error')
-          } else {
+          }
+          else {
             let headers = {
               'Content-Type': mimeType,
               'Etag': etag
@@ -97,7 +98,8 @@ function returnResourceFile(req, res) {
             res.end(data)
           }
         })
-      } else {
+      }
+      else {
         res.writeHead(404)
         res.end('Nod found.')
       }

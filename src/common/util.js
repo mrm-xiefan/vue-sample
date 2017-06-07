@@ -21,14 +21,16 @@ class Util {
   showModal(message, title = 'CONFIRM', type = 'info') {
     if (type == 'info' || type == 'warn') {
       manager.modal.type = type
-    } else {
+    }
+    else {
       manager.modal.type = 'info'
     }
     manager.modal.title = title
     manager.modal.message = message
     $('#modal-modal').modal()
   }
-  restGet(api, mockData = {}) {
+  async restGet(api, mockData = {}) {
+    var self = this;
     let options = {}
     if (manager.controller.development) {
       const mockAdapter = (config) => {
@@ -38,25 +40,37 @@ class Util {
       }
       options.adapter = mockAdapter
     }
-    this.api.get(api, options).then(
+
+    let responseData = null
+    await this.api.get(api, options).then(
       response => {
-        console.log(response.data)
-        console.log(response.status)
+        // console.log(response.data)
+        // console.log(response.status)
+        if (response.data.error) {
+          self.showModal('error1', 'ERROR', 'warn')
+        }
+        responseData = response.data
       }
     ).catch(
       error => {
-        if (error.response) {
-          console.log(error.response.headers);
-        }
-        else if (error.request) {
-          console.log(error.request);
-        }
-        else {
-          console.log(error.message);
-        }
-        console.log(error.config);
+        // if (error.response) {
+        //   console.log(error.response.headers);
+        // }
+        // else if (error.request) {
+        //   console.log(error.request);
+        // }
+        // else {
+        //   console.log(error.message);
+        // }
+        // console.log(error.config);
+        self.showModal('error2', 'ERROR', 'warn')
+        responseData = {error: 'S001', data: null}
       }
     )
+
+    return new Promise((resolve, reject) => {
+      resolve(responseData)
+    })
   }
 }
 

@@ -13,17 +13,23 @@
   import util from '@/common/util.js'
   export default {
     props: ['controller', 'users'],
-    mounted: function() {
+    mounted: function () {
       if ($.AdminLTE && $.AdminLTE.layout) {
         $.AdminLTE.layout.fix()
       }
     },
     methods: {
-      getData: function() {
-        let user = manager.addUser()
-        user.rename("oo");
-
-        util.restGet('/api/getData')
+      getData: async function () {
+        var dummydata = {error: null, data: {name: "mmmm"}}
+        await util.restGet('/api/getData', dummydata).then(
+          response => {
+            let user = manager.addUser()
+            user.rename(response.data.name)
+          }
+        )
+        return new Promise((resolve, reject) => {
+          resolve()
+        })
       }
     }
   }

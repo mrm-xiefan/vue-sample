@@ -10,7 +10,7 @@
 <script>
   export default {
     props: ['controller', 'users'],
-    mounted: function() {
+    mounted: function () {
       if ($.AdminLTE && $.AdminLTE.layout) {
         $.AdminLTE.layout.fix()
       }

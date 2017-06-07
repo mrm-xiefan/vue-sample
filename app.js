@@ -10,7 +10,8 @@ let app = express()
 let port = null
 if (process.env.NODE_ENV == 'development') {
   port = 3000
-} else {
+}
+else {
   port = 80
 }
 
