@@ -8,13 +8,17 @@ backend use node.js, express. and there is a rest api sample.
 
 use `npm run dev` to frontend develop with out backend. change *development* in *src/store/controller.js* to use dummy rest api. `util.restGet('/api/someapi', {dummydata: 'somedata'})` can get the dummydata in response.
 
-use `npm run build` to pack all frontend resource to *static* folder. don't forget change *development* in *src/store/controller.js* to false **before build**. (i'm sorry. i can't do this automatically.) then you may start your real server with `node app.js`. at last, point your browser to the end point. the real server's port is setted in *app.js*.
+use `npm run build` to pack all frontend resource to *static* folder. don't forget change *development* in *src/store/controller.js* to *false* **before build**. (i'm sorry. i can't do this automatically.)
+
+then you may start your real server. the real service's port is setted in *app.js*. start service by `node app.js`. at last, point your browser to the end point.
 
 ## 1. Build Setup
 
 ``` bash
 # clone source from github
-git clone xxx
+git clone https://github.com/mrm-xiefan/vue-sample
+
+cd vue-sample
 
 # install dependencies
 npm install
@@ -49,32 +53,16 @@ point to *http://localhost:8000/app2* to swich routing. defalut routing is *http
 
 ### use store data in components
 
-first, you must pass store to your component by props. this will let store accessable by your <template></template>. if you then want to access store in <script></script>. you should import it in  <script></script>. there is a sample in *src/components/app1Body.vue*.
+first, you must pass store to your component by props. this will let store accessable by your `<template></template>`. if you then want to access store in `<script></script>`. you should import it in `<script></script>`. there is an example in *src/components/app1Body.vue*.
 
 ### as it is server side rendering, use axios instead of ajax
 
-vue-resource is no longer useful. rapping axios to restGet, restPost, restPut, restDelete in *src/common/util.js*.
+vue-resource is no longer useful.
 
-### write thenable function
+rapping axios to restGet, restPost, restPut, restDelete in *src/common/util.js*.
 
-``` javascript
-somefunction: async function () {
-  // if call other function
-  let returnData = null
-  await otherfunction().then(
-    response => {
-      returnData = response.data
-    }
-  ).catch(
-    error => {
-      // i don't like throw. do everthing should do.
-      // so that outer process need not catch.
-      util.showModal('error', 'ERROR', 'warn')
-    }
-  )
-  // return a promise
-  return new Promise((resolve, reject) => {
-    resolve(returnData)
-  })
-}
-```
+### don't catch error by try or throw error
+
+it's just my way. simplely do ever error handling soon (ex: popup a modal window to show error info) and then reject. if something need to do after error happened (ex: clear something on browser), catch the rejected promise and do it, don't forget reject after all done.
+
+see more in *src/common/util.js* and *src/components/app1Body.js*

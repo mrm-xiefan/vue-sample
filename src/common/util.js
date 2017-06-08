@@ -29,19 +29,24 @@ class Util {
     manager.modal.message = message
     $('#modal-modal').modal()
   }
-  async restGet(api, mockData = {}) {
+  async restGet(api, mockData = null, giveMeError = false) {
     var self = this;
     let options = {}
     if (manager.controller.development) {
       const mockAdapter = (config) => {
         return new Promise((resolve, reject) => {
-          resolve({data: mockData, status: 200 })
+          if (giveMeError) {
+            resolve({data: {error: 'S001', data: null}, status: 200})
+          } else {
+            resolve({data: {error: null, data: mockData}, status: 200})
+          }
         })
       }
       options.adapter = mockAdapter
     }
 
     let responseData = null
+    // server response should be {error: errorcode, data: json}
     await this.api.get(api, options).then(
       response => {
         // console.log(response.data)
@@ -56,12 +61,10 @@ class Util {
         // if (error.response) {
         //   console.log(error.response.headers);
         // }
-        // else if (error.request) {
+        // if (error.request) {
         //   console.log(error.request);
         // }
-        // else {
-        //   console.log(error.message);
-        // }
+        // console.log(error.message);
         // console.log(error.config);
         self.showModal('error2', 'ERROR', 'warn')
         responseData = {error: 'S001', data: null}
@@ -69,7 +72,14 @@ class Util {
     )
 
     return new Promise((resolve, reject) => {
-      resolve(responseData)
+      if (responseData.error) {
+        // ever thing has done for error, so not reject.
+        // but data is null.
+        resolve(null)
+        // reject(responseData)
+      } else {
+        resolve(responseData.data)
+      }
     })
   }
 }

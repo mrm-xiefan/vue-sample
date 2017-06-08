@@ -20,16 +20,27 @@
     },
     methods: {
       getData: async function () {
-        var dummydata = {error: null, data: {name: "mmmm"}}
-        await util.restGet('/api/getData', dummydata).then(
+        var dummydata = {name: "kkk"}
+
+        // for dev: util.restGet('/api/getData', dummydata, true) to get an error end.
+        // error handle is done, you just need to do something when response is null.
+        var giveMeError = false
+        // let's set an error when add 4th user.
+        if (manager.users.length >= 3) {
+          giveMeError = true
+        }
+        await util.restGet('/api/getData', dummydata, giveMeError).then(
           response => {
-            let user = manager.addUser()
-            user.rename(response.data.name)
+            if (response) {
+              let user = manager.addUser()
+              user.rename(response.name)
+            }
+            else {
+              // if you want to do some error handle. do it here
+              manager.users.splice(0, manager.users.length)
+            }
           }
         )
-        return new Promise((resolve, reject) => {
-          resolve()
-        })
       }
     }
   }
