@@ -48,12 +48,12 @@
 <script>
   export default {
     props: ['controller'],
-    mounted: function () {
+    mounted: () => {
       if ($.AdminLTE.controlSidebar) {
         $.AdminLTE.controlSidebar.activate()
       }
     },
-    updated: function () {
+    updated: () => {
       if ($.AdminLTE.controlSidebar) {
         $.AdminLTE.controlSidebar.activate()
       }

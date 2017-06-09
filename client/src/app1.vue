@@ -1,11 +1,11 @@
 <template>
   <div class="wrapper">
-    <appHeader v-bind:controller="controller"></appHeader>
-    <appSideMenu v-bind:controller="controller"></appSideMenu>
-    <app1Body v-bind:controller="controller" v-bind:users="users"></app1Body>
+    <appHeader :controller="controller"></appHeader>
+    <appSideMenu :controller="controller"></appSideMenu>
+    <app1Body :controller="controller" :users="users" :trendData="trendData"></app1Body>
     <appFooter></appFooter>
-    <modal v-bind:modal="modal"></modal>
-    <appControlPanel v-bind:controller="controller"></appControlPanel>
+    <modal :modal="modal"></modal>
+    <appControlPanel :controller="controller"></appControlPanel>
     <div class="control-sidebar-bg"></div>
   </div>
 </template>
@@ -18,7 +18,7 @@
   import modal from '@/components/modal'
   import appControlPanel from '@/components/appControlPanel'
   export default {
-    props: ['modal', 'controller', 'users'],
+    props: ['modal', 'controller', 'users', 'trendData'],
     components: {
       appHeader: appHeader,
       appSideMenu: appSideMenu,

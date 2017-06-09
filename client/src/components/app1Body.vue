@@ -4,6 +4,7 @@
       <div>{{controller.currentApp}}</div>
       <div v-for="user in users">{{user.name}}</div>
       <button class="btn btn-primary" v-on:click="getData">get data</button>
+      <lineChart :trendData="trendData"></lineChart>
     </section>
   </div>
 </template>
@@ -11,15 +12,19 @@
 <script>
   import manager from '@/store/manager.js'
   import util from '@/common/util.js'
+  import lineChart from '@/components/lineChart'
   export default {
-    props: ['controller', 'users'],
-    mounted: function () {
+    props: ['controller', 'users', 'trendData'],
+    mounted: () => {
       if ($.AdminLTE && $.AdminLTE.layout) {
         $.AdminLTE.layout.fix()
       }
     },
+    components: {
+      lineChart: lineChart
+    },
     methods: {
-      getData: async function () {
+      getData: async () => {
         var dummydata = {name: "kkk"}
 
         // for dev: util.restGet('/api/getData', dummydata, true) to get an error end.

@@ -1,16 +1,17 @@
 <template>
   <div>
     <router-view
-      v-bind:modal="modal"
-      v-bind:controller="controller"
-      v-bind:users="users"
+      :modal="modal"
+      :controller="controller"
+      :users="users"
+      :trendData="trendData"
     ></router-view>
   </div>
 </template>
 
 <script>
   export default {
-    props: ['modal', 'controller', 'users']
+    props: ['modal', 'controller', 'users', 'trendData']
   }
 </script>
 

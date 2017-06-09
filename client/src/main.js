@@ -35,14 +35,16 @@ new Vue({
     return {
       modal: manager.modal,
       controller: manager.controller,
-      users: manager.users
+      users: manager.users,
+      trendData: manager.trendData
     }
   },
   router,
   template: '<app \
-    v-bind:modal="modal" \
-    v-bind:controller="controller" \
-    v-bind:users="users"\
+    :modal="modal" \
+    :controller="controller" \
+    :users="users" \
+    :trendData="trendData" \
   ></app>',
   components: {app}
 })

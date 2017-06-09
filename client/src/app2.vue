@@ -1,10 +1,10 @@
 <template>
   <div class="wrapper">
-    <appHeader v-bind:controller="controller"></appHeader>
-    <appSideMenu v-bind:controller="controller"></appSideMenu>
-    <app2Body v-bind:controller="controller" v-bind:users="users"></app2Body>
+    <appHeader :controller="controller"></appHeader>
+    <appSideMenu :controller="controller"></appSideMenu>
+    <app2Body :controller="controller" :users="users"></app2Body>
     <appFooter></appFooter>
-    <appControlPanel v-bind:controller="controller"></appControlPanel>
+    <appControlPanel :controller="controller"></appControlPanel>
     <div class="control-sidebar-bg"></div>
   </div>
 </template>

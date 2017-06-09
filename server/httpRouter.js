@@ -8,10 +8,11 @@ let logger = require('./logger.js')
 
 router.get('/api/getData', function (req, res, next) {
   let url_parts = url.parse(req.url, true)
-// let name = url_parts.query.name
-// logger.info('getData:' + name)
+  // let name = url_parts.query.name
+  // logger.info('getData:' + name)
   logger.info('getData')
 
+  // format must to be {error: null/code, data: null/data}.
   res.json({error: null, data: {name: "mmmm"}})
 })
 

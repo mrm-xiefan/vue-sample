@@ -27,7 +27,7 @@
   export default {
     props: ['controller'],
     methods: {
-      getDomain: function () {
+      getDomain: () => {
         console.log(util.getDomain())
       }
     }
