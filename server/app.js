@@ -2,17 +2,22 @@ let express = require('express')
 let path = require('path')
 let favicon = require('serve-favicon')
 let bodyParser = require('body-parser')
+let conf = require('config')
 let http = require('http')
+let log4js = require('log4js')
+let logger = require('./logger.js')
 let httpRouter = require('./httpRouter.js')
 let app = express()
 
-let port = 3000
+logger.info('NODE_ENV: ', process.env.NODE_ENV)
+let port = conf.port
 
 app.set('views', path.join(__dirname, '..', 'dist'))
 app.use(bodyParser.json({limit: '50mb'}))
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}))
 app.use(favicon(path.join(__dirname, '..', 'favicon.ico')))
 app.use(express.static(path.join(__dirname, '..', 'dist')))
+app.use(log4js.connectLogger(logger))
 app.use(httpRouter)
 
 let server = http.createServer(app)
@@ -22,7 +27,7 @@ function onListening() {
   let bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port
-  console.log('Listening on ' + bind)
+  logger.info('Listening on ' + bind)
 }
 
 function onError(error) {
@@ -37,11 +42,11 @@ function onError(error) {
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(bind + ' requires elevated privileges')
+      logger.error(bind + ' requires elevated privileges')
       process.exit(1)
       break
     case 'EADDRINUSE':
-      console.error(bind + ' is already in use')
+      logger.error(bind + ' is already in use')
       process.exit(1)
       break
     default:

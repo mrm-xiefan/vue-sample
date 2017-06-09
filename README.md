@@ -1,10 +1,8 @@
-# a sample of vue.js project.
+# a sample project with vue.js frontend and node.js backend.
 
 frontend use jquery, adminlte(not vue-adminlte), vue-router(to make SPA). with out vuex.(i don't like flux.)
 
-jquery works not so satisfy on vue.js. but if you do understand vue.js, you can make both of them perfect.
-
-backend use node.js, express. and there is a rest api sample.
+backend use node.js, express. and there is a rest api example.
 
 # installation
 
@@ -19,6 +17,9 @@ npm install
 # install backend dependencies
 cd vue-sample/server
 npm install
+
+# install pm2 in global
+npm install -g pm2
 ```
 
 # start project
@@ -35,11 +36,22 @@ npm run dev
 ``` bash
 cd vue-sample/client
 npm run build
+# then vue-sample/dist folder will be created.
 ```
 
 ## 3. develop backend
 
 ``` bash
 cd vue-sample/server
-node app.js
+NODE_ENV=development node app.js
+```
+
+## 4. deploy and serve your product
+
+``` bash
+cd vue-sample/client
+npm run build
+# then vue-sample/dist folder will be created.
+cd vue-sample/server
+pm2 start process.json --env production
 ```

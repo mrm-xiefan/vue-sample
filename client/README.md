@@ -1,8 +1,7 @@
 # frontend
 
 - use jquery, adminlte(not vue-adminlte), vue-router(to make SPA). with out vuex.(i don't like flux.)
-- jquery works not so satisfy on vue.js. but if you do understand vue.js, you can make both of them work.(perhaps not perfect)
--
+- jquery works not so satisfy on vue.js. but if you do understand vue.js, you can make both of them work.
 
 # some points for starter
 
