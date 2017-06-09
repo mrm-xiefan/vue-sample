@@ -27,7 +27,11 @@ router.get('/', function (req, res, next) {
 })
 
 router.get('/img/*', function (req, res, next) {
-  req.url = req.url.replace('/img/', '/static/img/')
+  req.url = req.url.replace('/img/', '/dist/static/img/')
+  returnResourceFile(req, res)
+})
+router.get('/fonts/*', function (req, res, next) {
+  req.url = req.url.replace('/fonts/', '/dist/static/fonts/')
   returnResourceFile(req, res)
 })
 router.get('/css/*', function (req, res, next) {

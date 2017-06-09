@@ -1,8 +1,8 @@
 <template>
   <header class="main-header">
     <router-link to="/" class="logo">
-      <span class="logo-mini"><b>DL</b>ib</span>
-      <span class="logo-lg"><b>D</b>igital<b>L</b>ibrary</span>
+      <span class="logo-mini"><b>VueS</b></span>
+      <span class="logo-lg">VueSample<b></b></span>
     </router-link>
     <nav class="navbar navbar-static-top">
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">

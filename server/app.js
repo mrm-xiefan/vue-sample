@@ -3,16 +3,16 @@ let path = require('path')
 let favicon = require('serve-favicon')
 let bodyParser = require('body-parser')
 let http = require('http')
-let httpRouter = require('./server/httpRouter.js')
+let httpRouter = require('./httpRouter.js')
 let app = express()
 
 let port = 3000
 
-app.set('views', path.join(__dirname, 'dist'))
+app.set('views', path.join(__dirname, '..', 'dist'))
 app.use(bodyParser.json({limit: '50mb'}))
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}))
-app.use(favicon(path.join(__dirname, 'static', 'img', 'favicon.ico')))
-app.use(express.static(path.join(__dirname, 'dist')))
+app.use(favicon(path.join(__dirname, '..', 'favicon.ico')))
+app.use(express.static(path.join(__dirname, '..', 'dist')))
 app.use(httpRouter)
 
 let server = http.createServer(app)
