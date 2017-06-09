@@ -55,7 +55,7 @@
     },
     updated: function () {
       if ($.AdminLTE.controlSidebar) {
-        $.AdminLTE.controlSidebar.activate();
+        $.AdminLTE.controlSidebar.activate()
       }
     }
   }

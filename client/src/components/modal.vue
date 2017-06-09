@@ -5,7 +5,7 @@
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-          <h4 v-bind:class="{'modal-title': true, 'text-blue': modal.type == 'info', 'text-red': modal.type == 'warn'}"><i v-bind:class="{'fa': true, 'fa-info-circle': modal.type == 'info', 'fa-warning': modal.type == 'warn'}" style="margin-right: 3px;"></i>{{modal.title}}</h4>
+          <h4 v-bind:class="{'modal-title': true, 'text-blue': modal.type == 'info', 'text-red': modal.type == 'warn'}"><i v-bind:class="{'fa': true, 'fa-info-circle': modal.type == 'info', 'fa-warning': modal.type == 'warn'}" style="margin-right: 3px"></i>{{modal.title}}</h4>
         </div>
         <div v-bind:class="{'modal-body': true, 'text-blue': modal.type == 'info', 'text-red': modal.type == 'warn'}">
           {{modal.message}}

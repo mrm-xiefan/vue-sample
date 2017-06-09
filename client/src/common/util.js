@@ -1,10 +1,11 @@
 import axios from 'axios/dist/axios.min.js'
 import manager from '@/store/manager.js'
+import CONST from '@/common/const.js'
 
 class Util {
   constructor() {
     let options = {
-      timeout: 120000,
+      timeout: CONST.httpTimeout,
       // withCredentials: true,
       // transformRequest: [(data) => JSON.stringify(data.data)]
     }
@@ -18,26 +19,25 @@ class Util {
     let resurl = location.href.replace(/#\/.*/, "")
     return resurl
   }
-  showModal(message, title = 'CONFIRM', type = 'info') {
-    if (type == 'info' || type == 'warn') {
-      manager.modal.type = type
-    }
-    else {
-      manager.modal.type = 'info'
-    }
-    manager.modal.title = title
-    manager.modal.message = message
+  showModal(code) {
+    manager.modal.type = CONST.type[code] || 'warn'
+    manager.modal.title = CONST.title[code] || 'ERROR'
+    manager.modal.message = CONST.message[code] || 'Unknown error!'
     $('#modal-modal').modal()
   }
-  async restGet(api, mockData = null, giveMeError = false) {
-    var self = this;
+  async restGet(api, mockData = null, giveMeError = null) {
+    var self = this
     let options = {}
     if (manager.controller.development) {
       const mockAdapter = (config) => {
         return new Promise((resolve, reject) => {
-          if (giveMeError) {
-            resolve({data: {error: 'S001', data: null}, status: 200})
-          } else {
+          if (giveMeError == 'network') {
+            reject({data: null, status: 400})
+          }
+          else if (giveMeError == 'server') {
+            resolve({data: {error: 'S002', data: null}, status: 200})
+          }
+          else {
             resolve({data: {error: null, data: mockData}, status: 200})
           }
         })
@@ -51,22 +51,26 @@ class Util {
       response => {
         // console.log(response.data)
         // console.log(response.status)
+
+        // server error
         if (response.data.error) {
-          self.showModal('error1', 'ERROR', 'warn')
+          self.showModal(response.data.error)
         }
         responseData = response.data
       }
     ).catch(
       error => {
         // if (error.response) {
-        //   console.log(error.response.headers);
+        //   console.log(error.response.headers)
         // }
         // if (error.request) {
-        //   console.log(error.request);
+        //   console.log(error.request)
         // }
-        // console.log(error.message);
-        // console.log(error.config);
-        self.showModal('error2', 'ERROR', 'warn')
+        // console.log(error.message)
+        // console.log(error.config)
+
+        // network error
+        self.showModal('S001')
         responseData = {error: 'S001', data: null}
       }
     )

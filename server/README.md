@@ -6,7 +6,7 @@
 
 ## serve
 
-`node app.js` is surely useful in develop. i suggest to use **pm2** to serve production.
+`node app.js` is surely useful in develop. i suggest to use **pm2** to serve product.
 
 ``` bash
 # install pm2 in global

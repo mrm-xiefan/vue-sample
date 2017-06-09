@@ -24,10 +24,11 @@
 
         // for dev: util.restGet('/api/getData', dummydata, true) to get an error end.
         // error handle is done, you just need to do something when response is null.
-        var giveMeError = false
+        var giveMeError = null
         // let's set an error when add 4th user.
+        // error type could be 'network' or 'server'
         if (manager.users.length >= 3) {
-          giveMeError = true
+          giveMeError = 'network'
         }
         await util.restGet('/api/getData', dummydata, giveMeError).then(
           response => {
