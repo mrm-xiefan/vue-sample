@@ -4,16 +4,9 @@ let favicon = require('serve-favicon')
 let bodyParser = require('body-parser')
 let http = require('http')
 let httpRouter = require('./server/httpRouter.js')
-// let socketRouter = require('./service/socketRouter.js').socketRouter
 let app = express()
 
-let port = null
-if (process.env.NODE_ENV == 'development') {
-  port = 3000
-}
-else {
-  port = 80
-}
+let port = 3000
 
 app.set('views', path.join(__dirname, 'dist'))
 app.use(bodyParser.json({limit: '50mb'}))

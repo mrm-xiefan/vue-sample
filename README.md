@@ -6,9 +6,9 @@ jquery works not so satisfy on vue.js. but if you do understand vue.js, you can 
 
 backend use node.js, express. and there is a rest api sample.
 
-use `npm run dev` to frontend develop with out backend. change *development* in *src/store/controller.js* to use dummy rest api. `util.restGet('/api/someapi', {dummydata: 'somedata'})` can get the dummydata in response.
+use `npm run dev` to frontend develop with out backend. change *development* in *client/store/controller.js* to use dummy rest api. `util.restGet('/api/someapi', {dummydata: 'somedata'})` can get the dummydata in response.
 
-use `npm run build` to pack all frontend resource to *static* folder. don't forget change *development* in *src/store/controller.js* to *false* **before build**. (i'm sorry. i can't do this automatically.)
+use `npm run build` to pack all frontend resource to *static* folder. don't forget change *development* in *client/store/controller.js* to *false* **before build**. (i'm sorry. i can't do this automatically.)
 
 then you may start your real server. the real service's port is setted in *app.js*. start service by `node app.js`. at last, point your browser to the end point.
 
@@ -45,7 +45,7 @@ node app.js
 
 ### don't put third party package into static folder
 
-just `npm install somepackage` and import them at *src/main.js*.
+just `npm install somepackage` and import them at *client/main.js*.
 
 ### this SPA sample has two routings
 
@@ -53,16 +53,16 @@ point to *http://localhost:8000/app2* to swich routing. defalut routing is *http
 
 ### use store data in components
 
-first, you must pass store to your component by props. this will let store accessable by your `<template></template>`. if you then want to access store in `<script></script>`. you should import it in `<script></script>`. there is an example in *src/components/app1Body.vue*.
+first, you must pass store to your component by props. this will let store accessable by your `<template></template>`. if you then want to access store in `<script></script>`. you should import it in `<script></script>`. there is an example in *client/components/app1Body.vue*.
 
 ### as it is server side rendering, use axios instead of ajax
 
 vue-resource is no longer useful.
 
-rapping axios to restGet, restPost, restPut, restDelete in *src/common/util.js*.
+rapping axios to restGet, restPost, restPut, restDelete in *client/common/util.js*.
 
 ### don't catch error by try or throw error
 
-it's just my way. simplely do ever error handling soon (ex: popup a modal window to show error info) and then reject. if something need to do after error happened (ex: clear something on browser), catch the rejected promise and do it, don't forget reject after all done.
+it's just my way. simplely do ever error handling soon (ex: popup a modal window to show error info) and then reject. if something need to do after error happened (ex: clear something on browser), catch the rejected promise and do it.
 
-see more in *src/common/util.js* and *src/components/app1Body.js*
+see more in *client/common/util.js* and *client/components/app1Body.js*
