@@ -3,8 +3,42 @@
     <section class="content">
       <div>{{controller.currentApp}}</div>
       <div v-for="user in users">{{user.name}}</div>
-      <button class="btn btn-primary" v-on:click="getData">get data</button>
-      <lineChart :trendData="trendData"></lineChart>
+      <div><button class="btn btn-primary" v-on:click="getData">get data</button></div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Trend Chart</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <lineChart :trendData="trendData"></lineChart>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="box box-primary detail-table">
+            <div class="box-header no-border">
+              <h3 class="box-title">白スキッパーシャツ</h3>
+            </div>
+            <detailTable :trendData="trendData" idx="0"></detailTable>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="box box-primary detail-table">
+            <div class="box-header no-border">
+              <h3 class="box-title">デコラティブ</h3>
+            </div>
+            <detailTable :trendData="trendData" idx="1"></detailTable>
+          </div>
+        </div>
+      </div>
     </section>
   </div>
 </template>
@@ -13,6 +47,7 @@
   import manager from '@/store/manager.js'
   import util from '@/common/util.js'
   import lineChart from '@/components/lineChart'
+  import detailTable from '@/components/detailTable'
   export default {
     props: ['controller', 'users', 'trendData'],
     mounted: () => {
@@ -21,30 +56,14 @@
       }
     },
     components: {
-      lineChart: lineChart
+      lineChart: lineChart,
+      detailTable: detailTable
     },
     methods: {
       getData: async () => {
-        var dummydata = {name: "kkk"}
-
-        // for dev: util.restGet('/api/getData', dummydata, true) to get an error end.
-        // error handle is done, you just need to do something when response is null.
-        var giveMeError = null
-        // let's set an error when add 4th user.
-        // error type could be 'network' or 'server'
-        if (manager.users.length >= 3) {
-          giveMeError = 'network'
-        }
-        await util.restGet('/api/getData', dummydata, giveMeError).then(
+        await util.restGet('/api/getData').then(
           response => {
-            if (response) {
-              let user = manager.addUser()
-              user.rename(response.name)
-            }
-            else {
-              // if you want to do some error handle. do it here
-              manager.users.splice(0, manager.users.length)
-            }
+            manager.trendData.refreshTrendData(response)
           }
         )
       }
@@ -53,5 +72,8 @@
 </script>
 
 <style scoped>
-
+  .detail-table {
+    height: 500px;
+    overflow-y: scroll;
+  }
 </style>

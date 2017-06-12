@@ -19,7 +19,7 @@ point to http://localhost:8000/app2 to swich routing. defalut routing is http://
 
 ## use store data in components
 
-first, you must pass store to your component by props. this will let store accessable by your `<template></template>`. if you then want to access store in `<script></script>`. you should import it in `<script></script>`. there is an example in **src/components/app1Body.vue**.
+first, you must pass store to your component by props. this will let store accessable by your `<template></template>`. if you then want to access store in `<script></script>`. you should import it in `<script></script>`. there is an example in **src/components/app2Body.vue**.
 
 ## as it is server side rendering, use axios instead of ajax
 
@@ -31,4 +31,4 @@ rapping axios to restGet, restPost, restPut, restDelete in **src/common/util.js*
 
 it's just my way. simplely do ever error handling soon (ex: popup a modal window to show error info) and then reject. if something need to do after error happened (ex: clear something on browser), catch the rejected promise and do it.
 
-see more in **src/common/util.js** and **src/components/app1Body.js**
+see more in **src/common/util.js** and **src/components/app2Body.js**

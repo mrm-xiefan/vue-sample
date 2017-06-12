@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <router-view
-      :modal="modal"
-      :controller="controller"
-      :users="users"
-      :trendData="trendData"
-    ></router-view>
-  </div>
+  <router-view
+    :modal="modal"
+    :controller="controller"
+    :users="users"
+    :trendData="trendData"
+  ></router-view>
 </template>
 
 <script>
