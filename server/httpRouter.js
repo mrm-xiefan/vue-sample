@@ -138,8 +138,10 @@ router.get('/api/getData', function (req, res, next) {
     ]
   }
 
-  // format must to be {error: null/code, data: null/data}.
-  res.json({error: null, data: data})
+  mysqlManager.getData((error, dd) => {
+    logger.debug("gotgot:%j", dd)
+    res.json({error: error, data: data})
+  })
 })
 
 module.exports = router

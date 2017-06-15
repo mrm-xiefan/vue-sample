@@ -5,27 +5,24 @@ import logger from './logger.js'
 class mysqlManager {
   constructor() {
   }
-  getData() {
-    if (conf.mode == 'real') {
+  getData(next) {
+    if (conf.data == 'real') {
       logger.debug('getData')
-      let connection = this.getConnection()
-      logger.debug('gotConnection!')
-      connection.query('SELECT 1 + 1 AS solution', (error, results) => {
-        logger.debug('query end')
+      this.getConnection((error, connection) => {
         if (error) {
-
+          next(error)
         } else {
-
+          //connection.query('SELECT 1 + 1 AS solution', (error, results) => {
+          logger.debug('connection end')
+          connection.end()
         }
       })
-      logger.debug('connection end')
-      connection.end()
-      logger.debug('connection ended')
     } else {
       logger.debug('dummy data.')
+      next(null, {})
     }
   }
-  getConnection() {
+  getConnection(next) {
     logger.debug('getConnection')
     let connection = mysql.createConnection({
       host: conf.mysql.host,
@@ -35,15 +32,15 @@ class mysqlManager {
       database: conf.mysql.database,
       timezone: conf.mysql.timezone
     })
-    connection.connect(error => {
-      logger.debug('connected')
+    connection.connect((error) => {
       if (error) {
-
+        logger.error(error)
+        next("S002", null)
       } else {
-
+        logger.debug('gotConnection')
+        next(null, connection)
       }
     })
-    return connection
   }
 }
 

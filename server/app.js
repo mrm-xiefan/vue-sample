@@ -1,13 +1,13 @@
+import log4js from 'log4js'
+import logger from './logger.js'
+logger.info('NODE_ENV: ', process.env.NODE_ENV)
 import express from 'express'
 import path from 'path'
 import favicon from 'serve-favicon'
 import bodyParser from 'body-parser'
 import conf from 'config'
 import http from 'http'
-import log4js from 'log4js'
-import logger from './logger.js'
 import httpRouter from './httpRouter.js'
-logger.info('NODE_ENV: ', process.env.NODE_ENV)
 let port = conf.port
 
 let app = express()
