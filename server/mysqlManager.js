@@ -14,7 +14,12 @@ class mysqlManager {
         } else {
           //connection.query('SELECT 1 + 1 AS solution', (error, results) => {
           logger.debug('connection end')
-          connection.end()
+          connection.end((error) => {
+            if (error) {
+              logger.error(error)
+            }
+          })
+          next(null, {})
         }
       })
     } else {
