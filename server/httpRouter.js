@@ -1,10 +1,12 @@
-let express = require('express')
+import express from 'express'
+import fs from 'fs'
+import path from 'path'
+import url from 'url'
+import qs from 'querystring'
+import logger from './logger.js'
+import mysqlManager from './mysqlManager.js'
+
 let router = express.Router()
-let fs = require('fs')
-let path = require('path')
-let url = require('url')
-let qs = require('querystring')
-let logger = require('./logger.js')
 
 router.get('/api/getData', function (req, res, next) {
   let url_parts = url.parse(req.url, true)

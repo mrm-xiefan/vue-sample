@@ -1,16 +1,16 @@
-let express = require('express')
-let path = require('path')
-let favicon = require('serve-favicon')
-let bodyParser = require('body-parser')
-let conf = require('config')
-let http = require('http')
-let log4js = require('log4js')
-let logger = require('./logger.js')
-let httpRouter = require('./httpRouter.js')
-let app = express()
-
+import express from 'express'
+import path from 'path'
+import favicon from 'serve-favicon'
+import bodyParser from 'body-parser'
+import conf from 'config'
+import http from 'http'
+import log4js from 'log4js'
+import logger from './logger.js'
+import httpRouter from './httpRouter.js'
 logger.info('NODE_ENV: ', process.env.NODE_ENV)
 let port = conf.port
+
+let app = express()
 
 app.set('views', path.join(__dirname, '..', 'dist'))
 app.use(bodyParser.json({limit: '50mb'}))

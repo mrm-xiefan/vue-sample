@@ -1,4 +1,4 @@
-let log4js = require('log4js')
+import log4js from 'log4js'
 log4js.configure({
   "appenders": [
     {
@@ -16,4 +16,4 @@ log4js.configure({
   "replaceConsole": true
 })
 
-module.exports = log4js.getLogger('system')
+export default log4js.getLogger('system')

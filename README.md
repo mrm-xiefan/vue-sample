@@ -43,7 +43,10 @@ npm run build
 
 ``` bash
 cd vue-sample/server
-NODE_ENV=development node app.js
+NODE_ENV=development
+export NODE_ENV
+#./node_modules/.bin/babel-node app.js
+npm run start
 ```
 
 ## 4. deploy and serve your product
@@ -53,5 +56,8 @@ cd vue-sample/client
 npm run build
 # then vue-sample/dist folder will be created.
 cd vue-sample/server
-pm2 start process.json --env production
+#pm2 start process.json --env production
+NODE_ENV=production
+export NODE_ENV
+nohup npm run start > run.log &
 ```
