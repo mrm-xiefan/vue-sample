@@ -17,7 +17,7 @@ just `npm install somepackage` and import them at **src/main.js**.
 
 point to http://localhost:8000/app2 to swich routing. defalut routing is http://localhost:8000/.
 
-## use store data in components
+## how to use store data in components
 
 first, you must pass store to your component by props. this will let store accessable by your `<template></template>`. if you then want to access store in `<script></script>`. you should import it in `<script></script>`. there is an example in **src/components/app2Body.vue**.
 
@@ -27,8 +27,10 @@ vue-resource is no longer useful.
 
 rapping axios to restGet, restPost, restPut, restDelete in **src/common/util.js**.
 
-## don't catch error by try or throw error
+## error process
 
-it's just my way. simplely do ever error handling soon (ex: popup a modal window to show error info) and then reject. if something need to do after error happened (ex: clear something on browser), catch the rejected promise and do it.
+it's just my way. i handle **frontend error** like this.
+
+don't catch error by try or throw error. simplely do ever error handling soon (ex: popup a modal window to show error info) and then reject. if something need to do after error happened (ex: clear something on browser), catch the rejected promise and do it.
 
 see more in **src/common/util.js** and **src/components/app2Body.js**
