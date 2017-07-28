@@ -33,4 +33,4 @@ it's just my way. i handle **frontend error** like this.
 
 don't catch error by try or throw error. simplely do ever error handling soon (ex: popup a modal window to show error info) and then reject. if something need to do after error happened (ex: clear something on browser), catch the rejected promise and do it.
 
-see more in [./src/common/util.js] and [./src/components/app2Body.js]
+see more in [src/common/util.js](./src/common/util.js) and [src/components/app2Body.js](./src/components/app2Body.js)
