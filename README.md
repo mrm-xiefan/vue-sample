@@ -19,7 +19,7 @@ cd vue-sample/server
 npm install
 
 # install pm2 in global
-npm install -g pm2
+# npm install -g pm2
 ```
 
 # start project
@@ -44,15 +44,4 @@ npm run build
 ``` bash
 cd vue-sample/server
 NODE_ENV=development ./node_modules/.bin/babel-node app.js
-```
-
-## 4. deploy and serve your product
-
-``` bash
-cd vue-sample/client
-npm run build
-# then vue-sample/dist folder will be created.
-cd vue-sample/server
-#pm2 start process.json --env production
-nohup ./start.sh > /dev/null 2>&1 &
 ```

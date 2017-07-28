@@ -4,7 +4,7 @@ import path from 'path'
 import url from 'url'
 import qs from 'querystring'
 import logger from './logger.js'
-import mysqlManager from './mysqlManager.js'
+// import mysqlManager from './mysqlManager.js'
 
 let router = express.Router()
 
@@ -137,11 +137,7 @@ router.get('/api/getData', function (req, res, next) {
       }
     ]
   }
-
-  mysqlManager.getData((error, dd) => {
-    logger.debug("gotgot:%j", dd)
-    res.json({error: error, data: data})
-  })
+  res.json({error: null, data: data})
 })
 
 module.exports = router
