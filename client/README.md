@@ -7,7 +7,7 @@
 
 ## 1. test rest api
 
-change **development** in [src/store/controller.js](./src/store/controller.js) to use cross region rest api. start backend service(reference [../server/README.md](../server/README.md)
+change **development** in [src/store/controller.js](./src/store/controller.js) to use cross region rest api. start backend service(reference [../server/README.md](../server/README.md).
 
 also you can customize your dummy response without using real api. just write `util.restGet('/api/someapi', params, dummyResponse)` to get the dummyResponse.
 
@@ -25,7 +25,7 @@ point to http://localhost:8000/app2 to swich routing. defalut routing is http://
 
 first, you must pass store to your component by props. this will let store accessable by your `<template></template>`. if you then want to access store in `<script></script>`. you should import it in `<script></script>`. there is an example in [src/components/app2Body.vue](./src/components/app2Body.vue).
 
-## 5. as it is server side rendering, use axios instead of ajax
+## 5. use axios instead of ajax
 
 vue-resource is no longer useful.
 
