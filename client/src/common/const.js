@@ -1,5 +1,6 @@
 let CONST = {
   httpTimeout: 120000,
+  developLocal: 'http://localhost:3000/',
   title: {
     'S001': 'ERROR',
     'S002': 'ERROR',

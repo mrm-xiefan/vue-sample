@@ -12,7 +12,7 @@ class Util {
       }
     }
     if (manager.controller.development) {
-      options.baseURL = 'http://localhost:3000/',
+      options.baseURL = CONST.developLocal,
       options.withCredentials = true
     }
     this.api = axios.create(options)
