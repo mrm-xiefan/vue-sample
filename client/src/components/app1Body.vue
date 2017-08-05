@@ -26,7 +26,7 @@
         await util.restGet('/api/getData', {name: 'name1'}).then(
           response => {
             if (response) {
-              util.showModal('B001', response)
+              console.log(JSON.stringify(response))
             }
           }
         )
@@ -35,7 +35,7 @@
         await util.restPost('/api/postData', {name: 'name1'}).then(
           response => {
             if (response) {
-              util.showModal('B001', response)
+              console.log(JSON.stringify(response))
             }
           }
         )
@@ -44,7 +44,7 @@
         await util.restPut('/api/putData', {name: 'name1'}).then(
           response => {
             if (response) {
-              util.showModal('B001', response)
+              console.log(JSON.stringify(response))
             }
           }
         )
@@ -53,7 +53,7 @@
         await util.restDelete('/api/deleteData', {name: 'name1'}).then(
           response => {
             if (response) {
-              util.showModal('B001', response)
+              console.log(JSON.stringify(response))
             }
           }
         )

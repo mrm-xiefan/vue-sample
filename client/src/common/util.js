@@ -17,10 +17,10 @@ class Util {
     }
     this.api = axios.create(options)
   }
-  showModal(code, debug) {
+  showModal(code) {
     manager.modal.type = CONST.type[code] || 'warn'
     manager.modal.title = CONST.title[code] || 'ERROR'
-    manager.modal.message = debug || CONST.message[code] || 'Unknown error!'
+    manager.modal.message = CONST.message[code] || 'Unknown error!'
     $('#modal-modal').modal()
   }
   async restGet(api, params, mockData = null, giveMeError = null) {

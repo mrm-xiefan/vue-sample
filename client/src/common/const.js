@@ -11,7 +11,7 @@ let CONST = {
     'S001': 'Network error!',
     'S002': 'Service error!',
     'S003': 'DB error!',
-    'B001': 'Debug.'
+    'B001': 'Business error.'
   },
   type: {
     'S001': 'warn',
