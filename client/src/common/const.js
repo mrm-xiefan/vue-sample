@@ -8,7 +8,7 @@ let CONST = {
   message: {
     'S001': 'Network error!',
     'S002': 'Service error!',
-    'B001': 'None Data.'
+    'B001': 'Debug.'
   },
   type: {
     'S001': 'warn',

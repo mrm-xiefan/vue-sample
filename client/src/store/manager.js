@@ -1,6 +1,5 @@
 import User from './user.js'
 import Controller from './controller.js'
-import TrendData from './trendData.js'
 
 class Manager {
   constructor() {
@@ -11,7 +10,6 @@ class Manager {
     }
     this.users = []
     this.controller = new Controller()
-    this.trendData = new TrendData()
   }
   addUser() {
     let user = new User()

@@ -2,7 +2,7 @@
   <header class="main-header">
     <router-link to="/" class="logo">
       <span class="logo-mini"><b>VueS</b></span>
-      <span class="logo-lg">VueSample<b></b></span>
+      <span class="logo-lg">VueSample</span>
     </router-link>
     <nav class="navbar navbar-static-top">
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -23,14 +23,8 @@
 </template>
 
 <script>
-  import util from '@/common/util.js'
   export default {
-    props: ['controller'],
-    methods: {
-      getDomain: () => {
-        console.log(util.getDomain())
-      }
-    }
+    props: ['manager']
   }
 </script>
 

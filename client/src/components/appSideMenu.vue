@@ -12,30 +12,30 @@
       </div>
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="treeview">
+        <li :class="{'treeview': true, 'active': manager.controller.currentApp == 'app1' || manager.controller.currentApp == 'app2'}">
           <a href="#">
             <i class="fa fa-files-o"></i>
-            <span>Visual Dashboard</span>
+            <span>app group</span>
           </a>
           <ul class="treeview-menu">
-            <li>
+            <li :class="{'active': manager.controller.currentApp == 'app1'}">
               <router-link to="/">
                 <i class="fa fa-circle-o"></i> app1
               </router-link>
             </li>
-            <li>
+            <li :class="{'active': manager.controller.currentApp == 'app2'}">
               <router-link to="/app2">
                 <i class="fa fa-circle-o"></i> app2
               </router-link>
             </li>
           </ul>
         </li>
-        <li>
+        <li :class="{'active': manager.controller.currentApp == 'app1'}">
           <router-link to="/">
             <i class="fa fa-th"></i> <span>app1</span>
           </router-link>
         </li>
-        <li>
+        <li :class="{'active': manager.controller.currentApp == 'app2'}">
           <router-link to="/app2">
             <i class="fa fa-th"></i> <span>app2</span>
           </router-link>
@@ -47,7 +47,7 @@
 
 <script>
   export default {
-    props: ['controller'],
+    props: ['manager'],
     mounted: () => {
       if ($.AdminLTE.controlSidebar) {
         $.AdminLTE.controlSidebar.activate()

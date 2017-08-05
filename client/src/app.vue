@@ -1,15 +1,10 @@
 <template>
-  <router-view
-    :modal="modal"
-    :controller="controller"
-    :users="users"
-    :trendData="trendData"
-  ></router-view>
+  <router-view :manager="manager"></router-view>
 </template>
 
 <script>
   export default {
-    props: ['modal', 'controller', 'users', 'trendData']
+    props: ['manager']
   }
 </script>
 

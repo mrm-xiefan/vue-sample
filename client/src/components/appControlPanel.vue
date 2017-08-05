@@ -35,7 +35,17 @@
 
 <script>
   export default {
-    props: ['controller']
+    props: ['modal'],
+    mounted: () => {
+      if ($.AdminLTE.controlSidebar) {
+        $.AdminLTE.controlSidebar.activate()
+      }
+    },
+    updated: () => {
+      if ($.AdminLTE.controlSidebar) {
+        $.AdminLTE.controlSidebar.activate()
+      }
+    }
   }
 </script>
 

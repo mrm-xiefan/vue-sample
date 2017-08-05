@@ -6,29 +6,29 @@ class Util {
   constructor() {
     let options = {
       timeout: CONST.httpTimeout,
-      // withCredentials: true,
-      // transformRequest: [(data) => JSON.stringify(data.data)]
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
     }
-    // if (manager.controller.development) {
-    //   options.baseURL = 'http://localhost:3000/',
-    //   options.withCredentials = true
-    // }
+    if (manager.controller.development) {
+      options.baseURL = 'http://localhost:3000/',
+      options.withCredentials = true
+    }
     this.api = axios.create(options)
   }
-  getDomain() {
-    let resurl = location.href.replace(/#\/.*/, "")
-    return resurl
-  }
-  showModal(code) {
+  showModal(code, debug) {
     manager.modal.type = CONST.type[code] || 'warn'
     manager.modal.title = CONST.title[code] || 'ERROR'
-    manager.modal.message = CONST.message[code] || 'Unknown error!'
+    manager.modal.message = debug || CONST.message[code] || 'Unknown error!'
     $('#modal-modal').modal()
   }
-  async restGet(api, mockData = null, giveMeError = null) {
+  async restGet(api, params, mockData = null, giveMeError = null) {
     var self = this
-    let options = {}
-    if (manager.controller.development) {
+    let options = {
+      params: params
+    }
+    if (mockData || giveMeError) {
       const mockAdapter = (config) => {
         return new Promise((resolve, reject) => {
           if (giveMeError == 'network') {
@@ -79,6 +79,105 @@ class Util {
       if (responseData.error) {
         // ever thing has done for error, so not reject.
         // but data is null.
+        resolve(null)
+        // reject(responseData)
+      } else {
+        resolve(responseData.data)
+      }
+    })
+  }
+  async restPost(api, params) {
+    var self = this
+    let options = {
+      params: params
+    }
+
+    let responseData = null
+    // server response should be {error: errorcode, data: json}
+    await this.api.post(api, options).then(
+      response => {
+        // server error
+        if (response.data.error) {
+          self.showModal(response.data.error)
+        }
+        responseData = response.data
+      }
+    ).catch(
+      error => {
+        // network error
+        self.showModal('S001')
+        responseData = {error: 'S001', data: null}
+      }
+    )
+
+    return new Promise((resolve, reject) => {
+      if (responseData.error) {
+        resolve(null)
+        // reject(responseData)
+      } else {
+        resolve(responseData.data)
+      }
+    })
+  }
+  async restPut(api, params) {
+    var self = this
+    let options = {
+      params: params
+    }
+
+    let responseData = null
+    // server response should be {error: errorcode, data: json}
+    await this.api.put(api, options).then(
+      response => {
+        // server error
+        if (response.data.error) {
+          self.showModal(response.data.error)
+        }
+        responseData = response.data
+      }
+    ).catch(
+      error => {
+        // network error
+        self.showModal('S001')
+        responseData = {error: 'S001', data: null}
+      }
+    )
+
+    return new Promise((resolve, reject) => {
+      if (responseData.error) {
+        resolve(null)
+        // reject(responseData)
+      } else {
+        resolve(responseData.data)
+      }
+    })
+  }
+  async restDelete(api, params) {
+    var self = this
+    let options = {
+      params: params
+    }
+
+    let responseData = null
+    // server response should be {error: errorcode, data: json}
+    await this.api.delete(api, options).then(
+      response => {
+        // server error
+        if (response.data.error) {
+          self.showModal(response.data.error)
+        }
+        responseData = response.data
+      }
+    ).catch(
+      error => {
+        // network error
+        self.showModal('S001')
+        responseData = {error: 'S001', data: null}
+      }
+    )
+
+    return new Promise((resolve, reject) => {
+      if (responseData.error) {
         resolve(null)
         // reject(responseData)
       } else {

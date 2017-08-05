@@ -1,11 +1,11 @@
 <template>
   <div class="wrapper">
-    <appHeader :controller="controller"></appHeader>
-    <appSideMenu :controller="controller"></appSideMenu>
-    <app1Body :controller="controller" :users="users" :trendData="trendData"></app1Body>
-    <appFooter></appFooter>
-    <modal :modal="modal"></modal>
-    <appControlPanel :controller="controller"></appControlPanel>
+    <appHeader :manager="manager"></appHeader>
+    <appSideMenu :manager="manager"></appSideMenu>
+    <app1Body :manager="manager"></app1Body>
+    <appFooter :manager="manager"></appFooter>
+    <modal :manager="manager"></modal>
+    <appControlPanel :manager="manager"></appControlPanel>
     <div class="control-sidebar-bg"></div>
   </div>
 </template>
@@ -18,7 +18,7 @@
   import modal from '@/components/modal'
   import appControlPanel from '@/components/appControlPanel'
   export default {
-    props: ['modal', 'controller', 'users', 'trendData'],
+    props: ['manager'],
     components: {
       appHeader: appHeader,
       appSideMenu: appSideMenu,

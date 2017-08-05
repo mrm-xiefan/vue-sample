@@ -33,18 +33,10 @@ new Vue({
   el: '#app',
   data: () => {
     return {
-      modal: manager.modal,
-      controller: manager.controller,
-      users: manager.users,
-      trendData: manager.trendData
+      manager: manager
     }
   },
   router,
-  template: '<app \
-    :modal="modal" \
-    :controller="controller" \
-    :users="users" \
-    :trendData="trendData" \
-  ></app>',
+  template: '<app :manager="manager"></app>',
   components: {app}
 })

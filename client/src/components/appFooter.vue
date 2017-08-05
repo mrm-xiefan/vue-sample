@@ -10,7 +10,9 @@
 </template>
 
 <script>
-
+  export default {
+    props: ['modal']
+  }
 </script>
 
 <style scoped>

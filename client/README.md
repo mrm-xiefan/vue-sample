@@ -5,13 +5,17 @@
 
 # some points for starter
 
-## 1. test rest api with out backend
+## 1. test rest api
 
-change **development** in **src/store/controller.js** to use dummy rest api. `util.restGet('/api/someapi', {dummydata: 'somedata'}, false)` can get the dummydata in response and `util.restGet('/api/someapi', null, true)` can get an error response. don't forget to change **development** before build.(i'm sorry. i can't do this automatically.)
+change **development** in [src/store/controller.js](./src/store/controller.js) to use cross region rest api. start backend service(reference [../server/README.md](../server/README.md)
+
+also you can customize your dummy response without using real api. just write `util.restGet('/api/someapi', params, dummyResponse)` to get the dummyResponse.
+
+or write `util.restGet('/api/someapi', params, null, 'network')` to get an error response.
 
 ## 2. don't put third party package into static folder
 
-just `npm install somepackage` and import them at **src/main.js**.
+just `npm install somepackage` and then import it at [src/main.js](./src/main.js).
 
 ## 3. this SPA sample has two routings
 
@@ -19,13 +23,13 @@ point to http://localhost:8000/app2 to swich routing. defalut routing is http://
 
 ## 4. how to use store data in components
 
-first, you must pass store to your component by props. this will let store accessable by your `<template></template>`. if you then want to access store in `<script></script>`. you should import it in `<script></script>`. there is an example in **src/components/app2Body.vue**.
+first, you must pass store to your component by props. this will let store accessable by your `<template></template>`. if you then want to access store in `<script></script>`. you should import it in `<script></script>`. there is an example in [src/components/app2Body.vue](./src/components/app2Body.vue).
 
 ## 5. as it is server side rendering, use axios instead of ajax
 
 vue-resource is no longer useful.
 
-rapping axios to restGet, restPost, restPut, restDelete in **src/common/util.js**.
+rapping axios to restGet, restPost, restPut, restDelete in [src/common/util.js](./src/common/util.js).
 
 ## 6. error process
 
