@@ -23,7 +23,7 @@
     },
     methods: {
       restGet: async () => {
-        await util.restGet('/api/getData', {test: 'something'}).then(
+        await util.restGet('/api/getData', {name: 'name1'}).then(
           response => {
             if (response) {
               util.showModal('B001', response)
@@ -32,7 +32,7 @@
         )
       },
       restPost: async () => {
-        await util.restPost('/api/postData', {test: 'something post'}).then(
+        await util.restPost('/api/postData', {name: 'name1'}).then(
           response => {
             if (response) {
               util.showModal('B001', response)
@@ -41,7 +41,7 @@
         )
       },
       restPut: async () => {
-        await util.restPut('/api/putData', {test: 'something put'}).then(
+        await util.restPut('/api/putData', {name: 'name1'}).then(
           response => {
             if (response) {
               util.showModal('B001', response)
@@ -50,7 +50,7 @@
         )
       },
       restDelete: async () => {
-        await util.restDelete('/api/deleteData', {test: 'something delete'}).then(
+        await util.restDelete('/api/deleteData', {name: 'name1'}).then(
           response => {
             if (response) {
               util.showModal('B001', response)

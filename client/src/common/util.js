@@ -155,6 +155,7 @@ class Util {
   async restDelete(api, params) {
     var self = this
     let options = {
+      data: params,
       params: params
     }
 

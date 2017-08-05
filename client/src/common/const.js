@@ -3,15 +3,18 @@ let CONST = {
   title: {
     'S001': 'ERROR',
     'S002': 'ERROR',
+    'S003': 'ERROR',
     'B001': 'INFORMATION'
   },
   message: {
     'S001': 'Network error!',
     'S002': 'Service error!',
+    'S003': 'DB error!',
     'B001': 'Debug.'
   },
   type: {
     'S001': 'warn',
+    'S002': 'warn',
     'S002': 'warn',
     'B001': 'info'
   }
