@@ -8,7 +8,7 @@
   export default {
     props: ['manager'],
     mounted: () => {
-      if (manager.controller.development) {
+      if (manager.controller.cors) {
         manager.socket = io(CONST.developLocal)
       } else {
         manager.socket = io(location.host)

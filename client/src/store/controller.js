@@ -1,6 +1,6 @@
 class Controller {
   constructor() {
-    this.development = true
+    this.cors = true
     this.currentApp = ''
   }
 }

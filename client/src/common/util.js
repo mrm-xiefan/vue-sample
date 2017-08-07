@@ -11,7 +11,7 @@ class Util {
         'Content-Type': 'application/json',
       }
     }
-    if (manager.controller.development) {
+    if (manager.controller.cors) {
       options.baseURL = CONST.developLocal,
       options.withCredentials = true
     }
