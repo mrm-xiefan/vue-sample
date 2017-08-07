@@ -41,7 +41,7 @@ npm run dev
 
 ## 2. build static files for backend
 
-change **development** to **false** in [client/src/store/controller.js](./client/src/store/controller.js).
+change **cors** to **false** in [client/src/store/controller.js](./client/src/store/controller.js).
 
 ``` bash
 cd vue-sample/client
