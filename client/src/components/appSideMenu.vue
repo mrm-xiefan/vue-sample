@@ -1,15 +1,7 @@
 <template>
   <aside class="main-sidebar">
     <section class="sidebar">
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="../assets/avatar.png" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>someone's name</p>
-          Administrator
-        </div>
-      </div>
+      <userPanel :manager="manager"></userPanel>
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
         <li :class="{'treeview': true, 'active': manager.controller.currentApp == 'app1' || manager.controller.currentApp == 'app2'}">
@@ -46,6 +38,7 @@
 </template>
 
 <script>
+  import userPanel from '@/components/userPanel'
   export default {
     props: ['manager'],
     mounted: () => {
@@ -57,6 +50,9 @@
       if ($.AdminLTE.controlSidebar) {
         $.AdminLTE.controlSidebar.activate()
       }
+    },
+    components: {
+      userPanel: userPanel
     }
   }
 </script>

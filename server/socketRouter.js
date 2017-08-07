@@ -14,8 +14,12 @@ class socketRouter {
     // self.io.use(function(socket, next) {
     //   userService.getUserInfoBySocket(socket, store, next)
     // })
-    self.io.sockets.on('connection', function(socket) {
-      logger.info("connected:" + socket.id)
+    self.io.sockets.on('connection', (socket) => {
+      logger.info('connected: ' + socket.id)
+
+      socket.on('disconnect', () => {
+        logger.info('disconnect: ' + socket.id)
+      })
     })
   }
 }

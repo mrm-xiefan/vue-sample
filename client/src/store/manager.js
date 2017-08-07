@@ -10,6 +10,7 @@ class Manager {
     }
     this.users = []
     this.controller = new Controller()
+    this.socket = null
   }
   addUser() {
     let user = new User()
