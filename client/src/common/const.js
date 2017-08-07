@@ -16,7 +16,7 @@ let CONST = {
   type: {
     'S001': 'warn',
     'S002': 'warn',
-    'S002': 'warn',
+    'S003': 'warn',
     'B001': 'info'
   }
 }
