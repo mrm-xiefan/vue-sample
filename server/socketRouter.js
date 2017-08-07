@@ -7,13 +7,10 @@ class socketRouter {
   }
   run(server, session, store) {
     let self = this
-    self.io = require('socket.io')(server, {path: conf.websocket.path})
+    self.io = require('socket.io')(server, {path: conf.socketPath})
     // self.io.set('heartbeat interval', 1000)
     // self.io.set('heartbeat timeout', 5000)
 
-    // self.io.use(function(socket, next) {
-    //   userService.getUserInfoBySocket(socket, store, next)
-    // })
     self.io.sockets.on('connection', (socket) => {
       logger.info('connected: ' + socket.id)
 

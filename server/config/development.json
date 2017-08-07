@@ -3,9 +3,7 @@
   "cors": [
     "http://localhost:8000"
   ],
-  "websocket": {
-      "path": "/socket.io"
-  },
+  "socketPath": "/socket.io",
   "mongo": {
     "url": "mongodb://localhost:27017/local"
   }

@@ -2,9 +2,7 @@
   "port": 3000,
   "cors": [
   ],
-  "websocket": {
-      "path": "/socket.io"
-  },
+  "socketPath": "/socket.io",
   "mongo": {
     "url": "mongodb://localhost:27017/local"
   }
