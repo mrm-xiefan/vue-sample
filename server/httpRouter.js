@@ -7,7 +7,7 @@ import logger from './logger.js'
 import conf from 'config'
 import mongo from './mongo.js'
 
-let allowCrossDomain = function(req, res, next) {
+let allowCrossDomain = (req, res, next) => {
   res.header('Access-Control-Allow-Origin', conf.cors)
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
   res.header('Access-Control-Allow-Credentials', true)
@@ -25,7 +25,7 @@ let allowCrossDomain = function(req, res, next) {
 let router = express.Router()
 router.all('*', allowCrossDomain)
 
-router.get('/api/getData', function(req, res) {
+router.get('/api/getData', (req, res) => {
   let url_parts = url.parse(req.url, true)
   logger.info('getData:' + JSON.stringify(url_parts.query))
 
@@ -40,7 +40,7 @@ router.get('/api/getData', function(req, res) {
   )
 })
 
-router.post('/api/postData', function(req, res) {
+router.post('/api/postData', (req, res) => {
   logger.info('begin post:' + JSON.stringify(req.body.params))
 
   let now = new Date()
@@ -56,7 +56,7 @@ router.post('/api/postData', function(req, res) {
   )
 })
 
-router.put('/api/putData', function(req, res) {
+router.put('/api/putData', (req, res) => {
   logger.info('begin put:' + JSON.stringify(req.body.params))
 
   let now = new Date()
@@ -72,7 +72,7 @@ router.put('/api/putData', function(req, res) {
   )
 })
 
-router.delete('/api/deleteData', function(req, res) {
+router.delete('/api/deleteData', (req, res) => {
   let url_parts = url.parse(req.url, true)
   logger.info('begin delete:' + JSON.stringify(url_parts.query))
 

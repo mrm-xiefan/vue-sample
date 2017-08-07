@@ -2,7 +2,6 @@ class User {
   constructor() {
     this.name = ''
   }
-
   rename(name) {
     this.name = name
   }

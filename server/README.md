@@ -12,7 +12,29 @@ in anyway, we must return something to client. my rule is to return a json like 
 
 # serve
 
+## 1. make sure mongodb works
+
 ``` bash
-# serve your production
+# confirm mongodb service
+mongo
+```
+
+## 2.1. if linux
+
+``` bash
+cd vue-sample/server
+# serve as production
 ./node_modules/.bin/babel-node app.js
+
+# or serve as development
+NODE_ENV=development ./node_modules/.bin/babel-node app.js
+```
+
+## 2.2. if windows
+
+add NODE_ENV(development or production) to your system environment. and then add /yourpath/vue-sample/server/node_modules/.bin/ to PATH.
+
+``` bash
+cd vue-sample/server
+babel-node app.js
 ```

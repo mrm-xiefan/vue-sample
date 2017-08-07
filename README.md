@@ -2,7 +2,9 @@
 
 frontend use jquery, adminlte(not vue-adminlte), vue-router(to make SPA). with out vuex.(i don't like flux.)
 
-backend use node.js, express. and there is a rest api example.
+backend use node.js, express, mongodb. with rest api example.
+
+socket.io is enabled only when backend is served.
 
 # installation
 
@@ -20,6 +22,12 @@ npm install
 
 # install pm2 in global
 # npm install -g pm2
+
+# install mongodb and start mongo service
+https://www.mongodb.com/download-center#community
+
+# i recommmend to use this IDE
+https://studio3t.com/
 ```
 
 # start project
@@ -33,6 +41,8 @@ npm run dev
 
 ## 2. build static files for backend
 
+change **development** to **false** in [client/src/store/controller.js](./client/src/store/controller.js).
+
 ``` bash
 cd vue-sample/client
 npm run build
@@ -43,5 +53,9 @@ npm run build
 
 ``` bash
 cd vue-sample/server
+# serve as production
+./node_modules/.bin/babel-node app.js
+
+# or serve as development
 NODE_ENV=development ./node_modules/.bin/babel-node app.js
 ```

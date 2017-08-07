@@ -5,7 +5,13 @@
 
 # some points for starter
 
-## 1. test rest api
+## 1. socket.io
+
+send your event any where like this: `manager.socket.emit('someEvent', params)`.
+
+listen server's message at [src/app.vue](./src/app.vue).
+
+## 2. test rest api
 
 change **development** in [src/store/controller.js](./src/store/controller.js) to use cross region rest api. start backend service(reference [../server/README.md](../server/README.md).
 
@@ -13,25 +19,25 @@ also you can customize your dummy response without using real api. just write `u
 
 or write `util.restGet('/api/someapi', params, null, 'network')` to get an error response.
 
-## 2. don't put third party package into static folder
+## 3. don't put third party package into static folder
 
 just `npm install somepackage` and then import it at [src/main.js](./src/main.js).
 
-## 3. this SPA sample has two routings
+## 4. this SPA sample has two routings
 
 point to http://localhost:8000/app2 to swich routing. defalut routing is http://localhost:8000/.
 
-## 4. how to use store data in components
+## 5. how to use store data in components
 
 first, you must pass store to your component by props. this will let store accessable by your `<template></template>`. if you then want to access store in `<script></script>`. you should import it in `<script></script>`. there is an example in [src/components/app2Body.vue](./src/components/app2Body.vue).
 
-## 5. use axios instead of ajax
+## 6. use axios instead of ajax
 
 vue-resource is no longer useful.
 
 rapping axios to restGet, restPost, restPut, restDelete in [src/common/util.js](./src/common/util.js).
 
-## 6. error process
+## 7. error process
 
 it's just my way. i handle **frontend error** like this.
 
