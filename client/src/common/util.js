@@ -81,7 +81,8 @@ class Util {
         // but data is null.
         resolve(null)
         // reject(responseData)
-      } else {
+      }
+      else {
         resolve(responseData.data)
       }
     })
@@ -114,7 +115,8 @@ class Util {
       if (responseData.error) {
         resolve(null)
         // reject(responseData)
-      } else {
+      }
+      else {
         resolve(responseData.data)
       }
     })
@@ -147,7 +149,8 @@ class Util {
       if (responseData.error) {
         resolve(null)
         // reject(responseData)
-      } else {
+      }
+      else {
         resolve(responseData.data)
       }
     })
@@ -181,7 +184,8 @@ class Util {
       if (responseData.error) {
         resolve(null)
         // reject(responseData)
-      } else {
+      }
+      else {
         resolve(responseData.data)
       }
     })

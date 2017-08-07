@@ -10,7 +10,8 @@
     mounted: () => {
       if (manager.controller.cors) {
         manager.socket = io(CONST.developLocal)
-      } else {
+      }
+      else {
         manager.socket = io(location.host)
       }
       manager.socket.on('connect', () => {

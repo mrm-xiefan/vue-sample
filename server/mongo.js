@@ -9,7 +9,8 @@ class mongo {
     MongoClient.connect(conf.mongo.url, function(err, mongodb) {
       if (err) {
         logger.error("Connected correctly to server")
-      } else {
+      }
+      else {
         self.db = mongodb
       }
     })
@@ -19,12 +20,14 @@ class mongo {
       if (outer_error) {
         logger.error("find connect error:" + JSON.stringify(outer_error))
         callback("S003", null)
-      } else {
+      }
+      else {
         collection.find(criteria, projection).toArray(function(inner_error, list) {
           if (inner_error) {
             logger.error("find error:" + JSON.stringify(inner_error))
             callback("S003", null)
-          } else {
+          }
+          else {
             callback(null, list)
           }
         })
@@ -36,12 +39,14 @@ class mongo {
       if (outer_error) {
         logger.error("insert connect error:" + JSON.stringify(outer_error))
         callback("S003", null)
-      } else {
+      }
+      else {
         collection.insert(document, options, function(inner_error, result) {
           if (inner_error) {
             logger.error("insert error:" + JSON.stringify(inner_error))
             callback("S003", null)
-          } else {
+          }
+          else {
             callback(null, result)
           }
         })
@@ -53,12 +58,14 @@ class mongo {
       if (outer_error) {
         logger.error("update connect error:" + JSON.stringify(outer_error))
         callback("S003", null)
-      } else {
+      }
+      else {
         collection.update(query, update, options, function(inner_error, result) {
           if (inner_error) {
             logger.error("update error:" + JSON.stringify(inner_error))
             callback("S003", null)
-          } else {
+          }
+          else {
             callback(null, result)
           }
         })
@@ -70,12 +77,14 @@ class mongo {
       if (outer_error) {
         logger.error("remove connect error:" + JSON.stringify(outer_error))
         callback("S003", null)
-      } else {
+      }
+      else {
         collection.remove(query, options, function(inner_error, result) {
           if (inner_error) {
             logger.error("remove error:" + JSON.stringify(inner_error))
             callback("S003", null)
-          } else {
+          }
+          else {
             callback(null, result)
           }
         })
