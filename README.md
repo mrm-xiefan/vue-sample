@@ -8,6 +8,18 @@ socket.io is enabled only when backend is served.
 
 # installation
 
+## 1. install git, node.js, mongodb, mongodb IDE
+
+google git
+
+install the newest node.js
+
+install mongodb from https://www.mongodb.com/download-center#community
+
+i recommmend to use this IDE: https://studio3t.com/
+
+## 2. use git and npm to download all parts
+
 ``` bash
 # clone source from github
 git clone https://github.com/mrm-xiefan/vue-sample
@@ -22,12 +34,6 @@ npm install
 
 # install pm2 in global
 # npm install -g pm2
-
-# install mongodb and start mongo service
-https://www.mongodb.com/download-center#community
-
-# i recommmend to use this IDE
-https://studio3t.com/
 ```
 
 # start project
