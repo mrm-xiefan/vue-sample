@@ -11,7 +11,7 @@
 
 <script>
   export default {
-    props: ['modal']
+    props: ['manager']
   }
 </script>
 
