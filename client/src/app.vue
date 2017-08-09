@@ -5,6 +5,7 @@
 <script>
   import CONST from '@/common/const.js'
   import manager from '@/store/manager.js'
+  import io from 'socket.io-client/dist/socket.io.js'
   export default {
     props: ['manager'],
     mounted: () => {

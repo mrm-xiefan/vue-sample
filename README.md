@@ -10,9 +10,9 @@ socket.io is enabled only when backend is served.
 
 ## 1. install git, node.js, mongodb, mongodb IDE
 
-google git
+google and install git
 
-install the newest node.js
+google and install node.js(version >= 7.5)
 
 install mongodb from https://www.mongodb.com/download-center#community
 
@@ -60,7 +60,7 @@ npm run build
 ``` bash
 cd vue-sample/server
 # serve as production
-./node_modules/.bin/babel-node app.js
+NODE_ENV=production ./node_modules/.bin/babel-node app.js
 
 # or serve as development
 NODE_ENV=development ./node_modules/.bin/babel-node app.js
