@@ -41,12 +41,12 @@
   import userPanel from '@/components/userPanel'
   export default {
     props: ['manager'],
-    mounted: () => {
+    mounted () {
       if ($.AdminLTE.controlSidebar) {
         $.AdminLTE.controlSidebar.activate()
       }
     },
-    updated: () => {
+    updated () {
       if ($.AdminLTE.controlSidebar) {
         $.AdminLTE.controlSidebar.activate()
       }

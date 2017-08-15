@@ -16,7 +16,7 @@
   import util from '@/common/util.js'
   export default {
     props: ['manager'],
-    mounted: () => {
+    mounted () {
       if ($.AdminLTE && $.AdminLTE.layout) {
         $.AdminLTE.layout.fix()
       }

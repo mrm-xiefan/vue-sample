@@ -8,7 +8,7 @@
   import io from 'socket.io-client/dist/socket.io.js'
   export default {
     props: ['manager'],
-    mounted: () => {
+    mounted () {
       if (manager.controller.cors) {
         manager.socket = io(CONST.developLocal)
       }
