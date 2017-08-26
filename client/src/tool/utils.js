@@ -1,8 +1,9 @@
 import axios from 'axios/dist/axios.min.js'
 import manager from '@/store/manager.js'
-import CONST from '@/common/const.js'
+import CONST from '@/store/const.js'
+import Vue from 'vue'
 
-class Util {
+class Utils {
   constructor() {
     let options = {
       timeout: CONST.httpTimeout,
@@ -16,12 +17,7 @@ class Util {
       options.withCredentials = true
     }
     this.api = axios.create(options)
-  }
-  showModal(code) {
-    manager.modal.type = CONST.type[code] || 'warn'
-    manager.modal.title = CONST.title[code] || 'ERROR'
-    manager.modal.message = CONST.message[code] || 'Unknown error!'
-    $('#modal-modal').modal()
+    this.event = new Vue()
   }
   async restGet(api, params, mockData = null, giveMeError = null) {
     var self = this
@@ -54,7 +50,7 @@ class Util {
 
         // server error
         if (response.data.error) {
-          self.showModal(response.data.error)
+          self.event.$emit('SHOW_MESSAGE', response.data.error)
         }
         responseData = response.data
       }
@@ -70,7 +66,7 @@ class Util {
         // console.log(error.config)
 
         // network error
-        self.showModal('S001')
+        self.event.$emit('SHOW_MESSAGE', 'S001')
         responseData = {error: 'S001', data: null}
       }
     )
@@ -99,14 +95,14 @@ class Util {
       response => {
         // server error
         if (response.data.error) {
-          self.showModal(response.data.error)
+          self.event.$emit('SHOW_MESSAGE', response.data.error)
         }
         responseData = response.data
       }
     ).catch(
       error => {
         // network error
-        self.showModal('S001')
+        self.event.$emit('SHOW_MESSAGE', 'S001')
         responseData = {error: 'S001', data: null}
       }
     )
@@ -133,14 +129,14 @@ class Util {
       response => {
         // server error
         if (response.data.error) {
-          self.showModal(response.data.error)
+          self.event.$emit('SHOW_MESSAGE', response.data.error)
         }
         responseData = response.data
       }
     ).catch(
       error => {
         // network error
-        self.showModal('S001')
+        self.event.$emit('SHOW_MESSAGE', 'S001')
         responseData = {error: 'S001', data: null}
       }
     )
@@ -168,14 +164,14 @@ class Util {
       response => {
         // server error
         if (response.data.error) {
-          self.showModal(response.data.error)
+          self.event.$emit('SHOW_MESSAGE', response.data.error)
         }
         responseData = response.data
       }
     ).catch(
       error => {
         // network error
-        self.showModal('S001')
+        self.event.$emit('SHOW_MESSAGE', 'S001')
         responseData = {error: 'S001', data: null}
       }
     )
@@ -190,6 +186,14 @@ class Util {
       }
     })
   }
+  socketEmit(event, params) {
+    if (manager.socket.connected) {
+      manager.socket.emit(event, params)
+    }
+    else {
+      this.event.$emit('SHOW_MESSAGE', 'S005')
+    }
+  }
 }
 
-export default new Util()
+export default new Utils()

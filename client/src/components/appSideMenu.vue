@@ -1,7 +1,17 @@
 <template>
   <aside class="main-sidebar">
     <section class="sidebar">
-      <userPanel :manager="manager"></userPanel>
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="../assets/avatar.png" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>someone's name</p>
+          <a href="#" v-if="manager.socket && manager.socket.connected"><i class="fa fa-circle text-success"></i> Online</a>
+          <a href="#" v-else><i class="fa fa-circle text-danger"></i> Offline</a>
+          <span class="small" v-if="manager.socket">{{manager.socket.id}}</span>
+        </div>
+      </div>
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
         <li :class="{'treeview': true, 'active': manager.controller.currentApp == 'app1' || manager.controller.currentApp == 'app2'}">
@@ -38,25 +48,13 @@
 </template>
 
 <script>
-  import userPanel from '@/components/userPanel'
   export default {
-    props: ['manager'],
-    mounted () {
-      if ($.AdminLTE.controlSidebar) {
-        $.AdminLTE.controlSidebar.activate()
-      }
-    },
-    updated () {
-      if ($.AdminLTE.controlSidebar) {
-        $.AdminLTE.controlSidebar.activate()
-      }
-    },
-    components: {
-      userPanel: userPanel
-    }
+    props: ['manager']
   }
 </script>
 
 <style scoped>
-
+  .small {
+    font-size: 60%;
+  }
 </style>

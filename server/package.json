@@ -6,6 +6,7 @@
     "start": "babel-node app.js"
   },
   "dependencies": {
+    "aws-sdk": "^2.104.0",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.25.0",
     "babel-plugin-transform-node-env-inline": "^0.1.1",
@@ -15,9 +16,13 @@
     "cookie": "^0.3.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
+    "formidable": "^1.1.1",
     "log4js": "^1.1.1",
+    "moment": "^2.18.1",
     "mongodb": "^2.2.30",
     "serve-favicon": "^2.4.3",
-    "socket.io": "^1.4.5"
+    "sharp": "^0.18.2",
+    "socket.io": "^1.4.5",
+    "uuid": "^3.1.0"
   }
 }

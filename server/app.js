@@ -18,7 +18,7 @@ app.set('views', path.join(__dirname, '..', 'dist'))
 app.use(bodyParser.json({limit: '50mb'}))
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}))
 app.use(favicon(path.join(__dirname, '..', 'favicon.ico')))
-app.use(express.static(path.join(__dirname, '..', 'dist')))
+app.use(express.static(path.join(__dirname, 'upload')), express.static(path.join(__dirname, '..', 'dist')))
 app.use(log4js.connectLogger(logger))
 app.use(httpRouter)
 
@@ -36,3 +36,9 @@ server.listen(port)
 server.on('listening', onListening)
 
 socketRouter.run(server)
+
+
+
+app.get('/upload/*', (req, res) => {
+  res.sendFile(path.join(__dirname, req.url))
+})

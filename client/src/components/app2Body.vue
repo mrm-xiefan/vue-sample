@@ -1,43 +1,53 @@
 <template>
   <div class="content-wrapper">
-    <section class="content">
+    <section class="content" v-on:click="closeSide">
       <div>{{manager.controller.currentApp}}</div>
-      <div v-for="user in manager.users">{{user.name}}</div>
-      <div><button class="btn btn-primary" v-on:click="getData">get data</button></div>
+      <div>{{object.sample}}</div>
+      <div><button class="btn btn-primary" v-on:click="switchObject">SWITCH_OBJECT</button></div>
     </section>
   </div>
 </template>
 
 <script>
+  import CONST from '@/store/const.js'
   import manager from '@/store/manager.js'
-  import util from '@/common/util.js'
+  import utils from '@/tool/utils.js'
+
   export default {
-    props: ['manager'],
-    mounted () {
+    props: ['manager', 'object'],
+    mounted() {
       if ($.AdminLTE && $.AdminLTE.layout) {
         $.AdminLTE.layout.fix()
       }
     },
     methods: {
-      getData: async () => {
-        var dummydata = {name: "ttss"}
+      closeSide() {
+        if ($('.control-sidebar').hasClass('control-sidebar-open')) {
+          $('.control-sidebar').removeClass('control-sidebar-open')
+        }
+        if (!$('body').hasClass('sidebar-collapse')) {
+          $('body').addClass('sidebar-collapse')
+        }
+      },
+      // object prop could be changed as this way.
+      switchObject(object) {
+        // use param(object) comes from template. or use js.
+        utils.event.$emit('SWITCH_OBJECT', {sample: "switched"})
+      },
+      dummyRestGet() {
+        let dummydata = {name: "dummy"}
         // for dev: util.restGet('/api/getData', dummydata, true) to get an error end.
         // error handle is done, you just need to do something when response is null.
-        var giveMeError = null
-        // let's set an error when add 4th user.
+        let giveMeError = null
         // error type could be 'network' or 'server'
-        if (manager.users.length >= 3) {
-          giveMeError = 'network'
-        }
-        await util.restGet('/api/getData', {}, dummydata, giveMeError).then(
+        // giveMeError = 'network'
+        util.restGet('/api/getData', {params: "some params"}, dummydata, giveMeError).then(
           response => {
             if (response) {
-              let user = manager.addUser()
-              user.rename(response.name)
+              console.log(response)
             }
             else {
               // if you want to do some error handle. do it here
-              manager.users.splice(0, manager.users.length)
             }
           }
         )
