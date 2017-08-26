@@ -23,6 +23,8 @@ import 'admin-lte/dist/js/app.min.js'
 import 'bootstrap-fileinput'
 
 import manager from '@/store/manager.js'
+import utils from '@/tool/utils.js'
+utils.init(manager)
 import Vue from 'vue'
 import router from '@/tool/router.js'
 import app from './app'

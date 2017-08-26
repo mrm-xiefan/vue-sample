@@ -242,6 +242,7 @@
         if (!response.error) {
           if (self.next) {
             self.next(response.data)
+            self.next = null
           }
         }
         else {

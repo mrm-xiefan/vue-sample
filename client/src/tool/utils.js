@@ -1,10 +1,11 @@
 import axios from 'axios/dist/axios.min.js'
-import manager from '@/store/manager.js'
 import CONST from '@/store/const.js'
 import Vue from 'vue'
 
 class Utils {
   constructor() {
+  }
+  init(manager) {
     let options = {
       timeout: CONST.httpTimeout,
       headers: {
@@ -18,6 +19,7 @@ class Utils {
     }
     this.api = axios.create(options)
     this.event = new Vue()
+    this.socket = null
   }
   async restGet(api, params, mockData = null, giveMeError = null) {
     var self = this
@@ -187,8 +189,8 @@ class Utils {
     })
   }
   socketEmit(event, params) {
-    if (manager.socket.connected) {
-      manager.socket.emit(event, params)
+    if (this.socket.connected) {
+      this.socket.emit(event, params)
     }
     else {
       this.event.$emit('SHOW_MESSAGE', 'S005')

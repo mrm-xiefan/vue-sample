@@ -18,6 +18,7 @@
         manager.socket = io(location.host)
       }
       manager.socket.on('connect', () => {
+        utils.socket = manager.socket
         if (manager.oldsocket != null && manager.oldsocket != manager.socket.id) {
           utils.socketEmit('reinit')
         }
