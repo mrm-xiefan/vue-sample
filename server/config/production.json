@@ -1,9 +1,17 @@
 {
   "port": 3000,
+  "endpoint": "http://localhost:3000/",
   "cors": [
   ],
+  "image": ["JPG", "JPEG", "PNG", "TIF", "TIFF", "SVG"],
   "socketPath": "/socket.io",
   "mongo": {
-    "url": "mongodb://localhost:27017/local"
+    "url": "mongodb://localhost:27017/local",
+    "limit": 15
+  },
+  "s3": {
+    "bucket": "bucketname",
+    "path": "path/to/somewhere",
+    "web": "https://webaccesspoint/"
   }
 }

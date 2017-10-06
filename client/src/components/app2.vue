@@ -2,30 +2,45 @@
   <div class="wrapper">
     <appHeader :manager="manager"></appHeader>
     <appSideMenu :manager="manager"></appSideMenu>
-    <app2Body :manager="manager"></app2Body>
+    <app2Body :manager="manager" :object="object"></app2Body>
     <appFooter :manager="manager"></appFooter>
-    <modal :manager="manager"></modal>
+    <messageModal :manager="manager"></messageModal>
     <appControlPanel :manager="manager"></appControlPanel>
     <div class="control-sidebar-bg"></div>
   </div>
 </template>
 
 <script>
+  import CONST from '@/store/const.js'
+  import manager from '@/store/manager.js'
+  import utils from '@/tool/utils.js'
+
   import appHeader from '@/components/appHeader'
   import appSideMenu from '@/components/appSideMenu'
   import app2Body from '@/components/app2Body'
   import appFooter from '@/components/appFooter'
-  import modal from '@/components/modal'
+  import messageModal from '@/components/messageModal'
   import appControlPanel from '@/components/appControlPanel'
   export default {
     props: ['manager'],
+    data() {
+      return {
+        object: {sample: "init object"}
+      }
+    },
     components: {
       appHeader: appHeader,
       appSideMenu: appSideMenu,
       app2Body: app2Body,
       appFooter: appFooter,
-      modal: modal,
+      messageModal: messageModal,
       appControlPanel: appControlPanel
+    },
+    created() {
+      let self = this
+      utils.event.$on('SWITCH_OBJECT', (object) => {
+        self.object.sample = object.sample
+      })
     }
   }
 </script>

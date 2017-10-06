@@ -3,19 +3,10 @@ import Controller from './controller.js'
 
 class Manager {
   constructor() {
-    this.modal = {
-      type: '',
-      title: '',
-      message: ''
-    }
-    this.users = []
+    this.user = new User()
     this.controller = new Controller()
     this.socket = null
-  }
-  addUser() {
-    let user = new User()
-    this.users.push(user)
-    return user
+    this.oldsocket = null
   }
 }
 

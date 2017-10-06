@@ -10,7 +10,7 @@
 this happens because the ES6/2015 arrow function syntax `(() => {})` binds this to the parent context. to fix this, you'll need to use a normal function declaration:
 
 ``` javascript
-mounted: function () {
+mounted: function() {
   // do some thing
 }
 ```
@@ -18,14 +18,14 @@ mounted: function () {
 or, my personal preference is the ES6/2015 shorthand, which does the same as above:
 
 ``` javascript
-mounted () {
+mounted() {
   // do some thing
 }
 ```
 
 ## 2. socket.io
 
-send your event any where like this: `manager.socket.emit('someEvent', params)`.
+send your event any where like this: `utils.socketEmit('someEvent', params)`.
 
 listen server's message at [src/app.vue](./src/app.vue).
 
@@ -33,9 +33,9 @@ listen server's message at [src/app.vue](./src/app.vue).
 
 change **cors** in [src/store/controller.js](./src/store/controller.js) to use cross region rest api. start backend service(reference [../server/README.md](../server/README.md).
 
-also you can customize your dummy response without using real api. just write `util.restGet('/api/someapi', params, dummyResponse)` to get the dummyResponse.
+also you can customize your dummy response without using real api. just write `utils.restGet('/api/someapi', params, dummyResponse)` to get the dummyResponse.
 
-or write `util.restGet('/api/someapi', params, null, 'network')` to get an error response.
+or write `utils.restGet('/api/someapi', params, null, 'network')` to get an error response.
 
 ## 4. don't put third party package into static folder
 
@@ -45,20 +45,16 @@ just `npm install somepackage` and then import it at [src/main.js](./src/main.js
 
 point to http://localhost:8000/app2 to swich routing. defalut routing is http://localhost:8000/.
 
-## 6. how to use store data in components
-
-first, you must pass store to your component by props. this will let store accessable by your `<template></template>`. if you then want to access store in `<script></script>`. you should import it in `<script></script>`. there is an example in [src/components/app2Body.vue](./src/components/app2Body.vue).
-
-## 7. use axios instead of ajax
+## 6. use axios instead of ajax
 
 vue-resource is no longer useful.
 
-rapping axios to restGet, restPost, restPut, restDelete in [src/common/util.js](./src/common/util.js).
+rapping axios to restGet, restPost, restPut, restDelete in [src/tool/utils.js](./src/tool/utils.js).
 
-## 8. error process
+## 7. error process
 
 it's just my way. i handle **frontend error** like this.
 
 don't catch error by try or throw error. simplely do ever error handling soon (ex: popup a modal window to show error info) and then reject. if something need to do after error happened (ex: clear something on browser), catch the rejected promise and do it.
 
-see more in [src/common/util.js](./src/common/util.js) and [src/components/app2Body.vue](./src/components/app2Body.vue)
+see more in [src/tool/utils.js](./src/tool/utils.js) and [src/components/app2Body.vue](./src/components/app2Body.vue)

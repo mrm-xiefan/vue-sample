@@ -5,14 +5,24 @@ class socketRouter {
   constructor() {
     this.io = null
   }
-  run(server, session, store) {
+  run(server, store) {
     let self = this
     self.io = require('socket.io')(server, {path: conf.socketPath})
     // self.io.set('heartbeat interval', 1000)
     // self.io.set('heartbeat timeout', 5000)
 
+    // self.io.use((socket, next) => {
+    //   userService.setUserToSocket(socket, store, next)
+    // })
+
     self.io.sockets.on('connection', (socket) => {
       logger.info('connected: ' + socket.id)
+
+      socket.on('reinit', (params) => {
+        logger.info(socket.id + ' reinit: ' + JSON.stringify(params))
+        let msg = {}
+        socket.emit('reinited', msg)
+      })
 
       socket.on('disconnect', () => {
         logger.info('disconnect: ' + socket.id)
@@ -26,13 +36,13 @@ export default new socketRouter()
 
 
 // // sending to sender-client only
-// socket.emit('message', "this is a test");
+// socket.emit('message', 'this is a test');
 
 // // sending to all clients, include sender
-// io.emit('message', "this is a test");
+// io.emit('message', 'this is a test');
 
 // // sending to all clients except sender
-// socket.broadcast.emit('message', "this is a test");
+// socket.broadcast.emit('message', 'this is a test');
 
 // // sending to all clients in 'game' room(channel) except sender
 // socket.broadcast.to('game').emit('message', 'nice game');

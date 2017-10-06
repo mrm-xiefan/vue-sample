@@ -36,12 +36,7 @@
 <script>
   export default {
     props: ['manager'],
-    mounted () {
-      if ($.AdminLTE.controlSidebar) {
-        $.AdminLTE.controlSidebar.activate()
-      }
-    },
-    updated () {
+    mounted() {
       if ($.AdminLTE.controlSidebar) {
         $.AdminLTE.controlSidebar.activate()
       }

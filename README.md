@@ -33,7 +33,7 @@ cd vue-sample/server
 npm install
 
 # install pm2 in global
-# npm install -g pm2
+npm install -g pm2
 ```
 
 # start project
@@ -64,4 +64,23 @@ NODE_ENV=production ./node_modules/.bin/babel-node app.js
 
 # or serve as development
 NODE_ENV=development ./node_modules/.bin/babel-node app.js
+```
+
+## 4. serve
+
+use pm2 to serve.
+
+``` bash
+cd vue-sample/server
+# serve as production at the first time
+pm2 start pm2config.json
+
+# then you can use these commands
+# you can edit name(vs) in pm2.json
+pm2 show vs
+pm2 start vs
+pm2 stop vs
+pm2 restart vs
+pm2 logs vs
+# and so on...
 ```
