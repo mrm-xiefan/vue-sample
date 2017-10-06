@@ -21,6 +21,7 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import 'admin-lte/plugins/slimScroll/jquery.slimscroll.min.js'
 import 'admin-lte/dist/js/app.min.js'
 import 'bootstrap-fileinput'
+import 'es6-promise/auto'
 
 import manager from '@/store/manager.js'
 import utils from '@/tool/utils.js'
