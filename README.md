@@ -12,13 +12,15 @@ socket.io is enabled only when backend is served.
 
 google and install git
 
-google and install node.js(version >= 7.5)
+google and install node.js(version >= 8.4)
+
+google and install python (version must be 2.7.x)
 
 install mongodb from https://www.mongodb.com/download-center#community
 
-i recommmend to use this IDE: https://studio3t.com/
+i recommend to use this IDE: https://studio3t.com/
 
-## 2. use git and npm to download all parts
+## 2. use git and npm to download all library
 
 ``` bash
 # clone source from github
@@ -38,49 +40,54 @@ npm install -g pm2
 
 # start project
 
-## 1. develop frontend without backend
+## 1. boot frontend
 
 ``` bash
 cd vue-sample/client
 npm run dev
 ```
 
-## 2. build static files for backend
+## 2. boot backend
 
-change **cors** to **false** in [client/src/store/controller.js](./client/src/store/controller.js).
+## 2.1. if linux
+
+``` bash
+cd vue-sample/server
+NODE_ENV=development ./node_modules/.bin/babel-node app.js
+```
+
+## 2.2. if windows
+
+add `NODE_ENV`(value should be development or production) to your system environment. and then add /yourpath/vue-sample/server/node_modules/.bin/ to `PATH`.
+
+``` bash
+cd vue-sample/server
+babel-node app.js
+```
+
+## 3. deploy
+
+change **cors** in [client/src/store/controller.js](./client/src/store/controller.js) to **false**.
 
 ``` bash
 cd vue-sample/client
 npm run build
 # then vue-sample/dist folder will be created.
-```
 
-## 3. develop backend
-
-``` bash
-cd vue-sample/server
-# serve as production
-NODE_ENV=production ./node_modules/.bin/babel-node app.js
-
-# or serve as development
-NODE_ENV=development ./node_modules/.bin/babel-node app.js
-```
-
-## 4. serve
-
-use pm2 to serve.
-
-``` bash
-cd vue-sample/server
-# serve as production at the first time
+# use pm2 to deamon
+# install pm2
+npm install -g pm2
+# start first time
 pm2 start pm2config.json
-
-# then you can use these commands
-# you can edit name(vs) in pm2.json
-pm2 show vs
-pm2 start vs
-pm2 stop vs
-pm2 restart vs
-pm2 logs vs
-# and so on...
+# confirm status
+pm2 list
+pm2 show dl
+# tail log
+pm2 logs dl
+# restart
+pm2 restart dl
+# stop
+pm2 stop dl
+# delete
+pm2 delete dl
 ```
