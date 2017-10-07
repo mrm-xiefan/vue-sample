@@ -31,7 +31,7 @@ listen server's message at [src/app.vue](./src/app.vue).
 
 ## 3. test rest api
 
-change **cors** in [src/store/controller.js](./src/store/controller.js) to use cross region rest api. start backend service(reference [../server/README.md](../server/README.md).
+change **cors** in [src/store/controller.js](./src/store/controller.js) to use cross region rest api. start backend service(reference [../server/README.md](../server/README.md)).
 
 also you can customize your dummy response without using real api. just write `utils.restGet('/api/someapi', params, dummyResponse)` to get the dummyResponse.
 
