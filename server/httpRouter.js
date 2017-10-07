@@ -92,7 +92,6 @@ router.delete('/api/deleteData', (req, res) => {
 
 router.post('/api/uploadFiles', (req, res, next) => {
   logger.info('uploadFiles')
-
   dataService.uploadFiles(req, (error, list, params) => {
     if (!error) {
       logger.info('upload end: ' + JSON.stringify(list))
@@ -101,18 +100,22 @@ router.post('/api/uploadFiles', (req, res, next) => {
       for (let i = 0; i < list.length; i ++) {
         if (process.env.NODE_ENV == 'development') {
           files.push({
+            file: conf.endpoint + 'upload/' + list[i].folder + '/' + list[i].name,
             thumbnail: list[i].thumbnail? (conf.endpoint + 'upload/' + list[i].folder + '/' + list[i].thumbnail): null,
             folder: list[i].folder,
             name: list[i].name,
-            type: list[i].type
+            type: list[i].type,
+            size: list[i].size
           })
         }
         else {
           files.push({
+            file: conf.s3.base + conf.s3.path + list[i].folder + '/' + list[i].name,
             thumbnail: list[i].thumbnail? (conf.s3.web + conf.s3.path + list[i].folder + '/' + list[i].thumbnail): null,
             folder: list[i].folder,
             name: list[i].name,
-            type: list[i].type
+            type: list[i].type,
+            size: list[i].size
           })
         }
       }

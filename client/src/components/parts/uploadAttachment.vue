@@ -1,17 +1,6 @@
 <template>
-  <div class="modal fade in" id="upload-modal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true" data-show="true" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" id="close-upload" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title text-blue">UPLOAD FILES</h4>
-        </div>
-        <div class="modal-body" style="min-height: 300px;">
-          <input id="upload-input" type="file" class="file" multiple></input>
-        </div>
-      </div>
-    </div>
+  <div>
+    <input id="upload-input-attachment" type="file" class="file" multiple></input>
   </div>
 </template>
 
@@ -24,35 +13,46 @@
     props: ['manager'],
     data() {
       return {
-        next: null
+        next: null,
+        error: null
       }
     },
     created() {
       let self = this
-      utils.event.$on('SHOW_UPLOAD', (next) => {
-        if (next) {
-          self.next = next
+      utils.event.$on('TRIGGER_UPLOAD', (next, error) => {
+        if ($('#upload-input-attachment').fileinput('getFilesCount') > 0) {
+          if (next) {
+            self.next = next
+          }
+          else {
+            self.next = null
+          }
+          if (error) {
+            self.error = error
+          }
+          else {
+            self.error = null
+          }
+          $('#upload-input-attachment').fileinput('upload')
         }
         else {
-          self.next = null
+          if (next) {
+            next([])
+          }
         }
-        $('#upload-modal').modal('show')
       })
     },
     beforeDestroy() {
-      utils.event.$off('SHOW_UPLOAD')
+      utils.event.$off('TRIGGER_UPLOAD')
     },
     mounted() {
       let self = this
       let uploadUrl = ''
       if (manager.controller.cors) {
-        uploadUrl = CONST.developHost
-      }
-      else {
-        uploadUrl = '/'
+        uploadUrl = CONST.developHost + 'digitalboard/uq/'
       }
       uploadUrl += 'api/uploadFiles'
-      $('#upload-input').fileinput(
+      $('#upload-input-attachment').fileinput(
         {
           uploadUrl: uploadUrl,
           // allowedFileExtensions : null,
@@ -61,21 +61,25 @@
           maxFileSize: 2000000,
           // previewFileType: 'any',
           showCaption: true,
-          // showUpload: false,
+          showUpload: false,
           // showRemove: false,
           // showCancel: false,
           showClose: false,
           showBrowse: true,
-          browseOnZoneClick: true,
+          showPreview: false,
+          browseOnZoneClick: false,
           // removeFromPreviewOnError: false,
           // previewFileIcon: '<i class="fa fa-file"></i>&nbsp;',
-          browseIcon: '<i class="fa fa-folder-open-o"></i>&nbsp;',
-          removeIcon: '<i class="fa fa-trash"></i>&nbsp;',
-          removeClass: 'btn btn-primary',
+          browseIcon: '<i class="fa fa-paperclip"></i>&nbsp;',
+          browseLabel: 'Attachment',
+          browseClass: 'btn btn-default',
+          removeIcon: '<i class="fa fa-chain-broken"></i>&nbsp;',
+          removeLabel: 'Clear',
+          removeClass: 'btn btn-default',
           cancelIcon: '<i class="fa fa-ban"></i>&nbsp;',
-          cancelClass: 'btn btn-primary',
+          cancelClass: 'btn btn-default',
           uploadIcon: '<i class="fa fa-upload"></i>&nbsp;',
-          uploadClass: 'btn btn-primary',
+          uploadClass: 'btn btn-default',
           // msgValidationErrorIcon: '<i class="fa fa-info-circle"></i>&nbsp;',
           fileActionSettings: {
             showRemove: true,
@@ -96,12 +100,12 @@
                   '{delete}' +
                 '</div>\n' +
               '</div>',
-            actionDelete: '<button type="button" class="kv-file-remove btn btn-primary" {dataUrl} {dataKey}><i class="fa fa-trash-o"></i> Remove</button>',
+            actionDelete: '<button type="button" class="kv-file-remove btn btn-default" {dataUrl} {dataKey}><i class="fa fa-trash-o"></i> Remove</button>',
             // actionUpload: ''
             preview:
-              '<div class="file-preview" style="min-height: 300px; width: 100%; border-radius: 5px; border: 1px solid #ddd; padding: 5px; margin-bottom: 5px;">\n' +
+              '<div class="file-preview" style="width: 100%;">\n' +
                 '{close}' +
-                '<div class="{dropClass}" style="font-size: 20px; min-height: 300px; padding: 5px; border: 1px dashed #aaa; border-radius: 4px; height: 100%; text-align: center; vertical-align: middle;">\n' +
+                '<div style="padding: 5px;">\n' +
                   '<div class="file-preview-thumbnails" style="font-size: 14px; overflow: hidden; width: 100%;">\n' +
                   '</div>\n' +
                   '<div class="clearfix"></div>' +
@@ -111,7 +115,7 @@
               '</div>',
             main1:
               '<div class="row">\n' +
-                '<div class="col-lg-12" style="min-height: 300px;">\n' +
+                '<div class="col-lg-12">\n' +
                   '{preview}\n' +
                   '<div class="kv-upload-progress hide"></div>\n' +
                 '</div>\n' +
@@ -128,7 +132,7 @@
           },
           previewTemplates: {
             image:
-              '<div class="file-preview-frame{frameClass}" id="{previewId}" data-fileindex="{fileindex}" data-template="{template}" style="float: left; padding-bottom: 5px; margin: 0px 5px 5px 0px; border: 0px; border-color: #141a1d; border-radius: 4px; box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);">\n' +
+              '<div class="file-preview-frame{frameClass}" id="{previewId}" data-fileindex="{fileindex}" data-template="{template}" style="float: left; padding-bottom: 5px; margin: 0px 5px 5px 0px; border: 0px; border-color: #fff; border-radius: 1px;">\n' +
                 '<div class="kv-file-content">' +
                   '<img src="{data}" class="kv-preview-data file-preview-image" title="{caption}" alt="{caption}" ' + 'style="width: {width}; height: {height}; border-top-left-radius: 4px; border-top-right-radius: 4px;"' + '>\n' +
                 '</div>\n' +
@@ -228,50 +232,60 @@
           }
         }
       )
-      $('#upload-input').on('filepreajax', (event, previewId, index) => {
-        $('#close-upload').hide()
-      })
-      // $('#upload-input').on('fileloaded', () => {
-      //   let cnt = $(this).closest('.file-input').find('.file-preview-frame').size()
-      //   if (cnt > 1) {
-      //     for (let idx = cnt - 2; idx >= 0; idx --) {
-      //       $(this).closest('.file-input').find('.file-preview-frame:eq(' + idx + ') .kv-file-remove').click()
-      //     }
-      //   }
-      // })
-      $('#upload-input').on('filebatchuploadsuccess', (event, data, previewId, index) => {
+      $('#upload-input-attachment').on('filebatchuploadsuccess', (event, data, previewId, index) => {
         let form = data.form, files = data.files, extra = data.extra, response = data.response, reader = data.reader
         if (!response.error) {
           if (self.next) {
             self.next(response.data)
             self.next = null
+            self.error = null
           }
         }
         else {
           utils.event.$emit('SHOW_MESSAGE', response.error)
+          if (self.error) {
+            self.error()
+            self.next = null
+            self.error = null
+          }
         }
-        $('#upload-input').fileinput('clear')
-        $('#close-upload').show()
-        $('#upload-modal').modal('hide')
+        $('#upload-input-attachment').fileinput('clear')
       })
-      // $('#upload-input').on('fileuploaded', (event, data, previewId, index) => {
-      //   $('#close-upload').show()
+      // $('#upload-input-attachment').on('fileuploaded', (event, data, previewId, index) => {
       // })
-      // $('#upload-input').on('fileuploaderror', (event, numFiles, label) => {
+      // $('#upload-input-attachment').on('fileuploaderror', (event, numFiles, label) => {
       // })
-      $('#upload-input').on('fileuploaderror', (event, numFiles, label) => {
-        $('#close-upload').show()
-      })
-      $('#upload-input').on('filebatchuploaderror', (event, numFiles, label) => {
-        $('#upload-input').fileinput('clear')
-        $('#close-upload').show()
-        $('#upload-modal').modal('hide')
+      $('#upload-input-attachment').on('filebatchuploaderror', (event, numFiles, label) => {
+        $('#upload-input-attachment').fileinput('clear')
         utils.event.$emit('SHOW_MESSAGE', 'S006')
+        if (self.error) {
+          self.error()
+          self.next = null
+          self.error = null
+        }
       })
     }
   }
 </script>
 
+<style>
+  .file-thumbnail-footer {
+    padding: 10px;
+    font-size: 12px;
+    background: #fff;
+  }
+  .file-footer-caption {
+    margin-bottom: 8px;
+  }
+  .file-thumbnail-footer .btn {
+    border-radius: 0px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 1px solid #ddd;
+    font-weight: 100;
+    font-size: 12px;
+    padding: 5px 15px;
+  }
+</style>
 <style scoped>
-
 </style>

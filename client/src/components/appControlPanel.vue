@@ -37,9 +37,7 @@
   export default {
     props: ['manager'],
     mounted() {
-      if ($.AdminLTE.controlSidebar) {
-        $.AdminLTE.controlSidebar.activate()
-      }
+      $('body').layout('fixSidebar')
     }
   }
 </script>

@@ -2,6 +2,7 @@ import log4js from 'log4js'
 import logger from './logger.js'
 logger.info('NODE_ENV: ', process.env.NODE_ENV)
 import express from 'express'
+import mongo from './mongo.js'
 import path from 'path'
 import favicon from 'serve-favicon'
 import bodyParser from 'body-parser'
@@ -32,10 +33,14 @@ let onListening = function() {
   logger.info('Listening on ' + bind)
 }
 
-server.listen(port)
-server.on('listening', onListening)
+mongo.init(() => {
+  logger.debug('Begin listen...')
 
-socketRouter.run(server)
+  server.listen(port)
+  server.on('listening', onListening)
+
+  socketRouter.run(server)
+})
 
 
 

@@ -14,7 +14,7 @@ class Utils {
       }
     }
     if (manager.controller.cors) {
-      options.baseURL = CONST.developLocal,
+      options.baseURL = CONST.developHost
       options.withCredentials = true
     }
     this.api = axios.create(options)
@@ -45,11 +45,12 @@ class Utils {
 
     let responseData = null
     // server response should be {error: errorcode, data: json}
+    self.event.$emit('LOCK_SCREEN', 'lock')
     await this.api.get(api, options).then(
       response => {
         // console.log(response.data)
         // console.log(response.status)
-
+        self.event.$emit('LOCK_SCREEN', 'unlock')
         // server error
         if (response.data.error) {
           self.event.$emit('SHOW_MESSAGE', response.data.error)
@@ -93,8 +94,10 @@ class Utils {
 
     let responseData = null
     // server response should be {error: errorcode, data: json}
+    self.event.$emit('LOCK_SCREEN', 'lock')
     await this.api.post(api, options).then(
       response => {
+        self.event.$emit('LOCK_SCREEN', 'unlock')
         // server error
         if (response.data.error) {
           self.event.$emit('SHOW_MESSAGE', response.data.error)
@@ -127,8 +130,10 @@ class Utils {
 
     let responseData = null
     // server response should be {error: errorcode, data: json}
+    self.event.$emit('LOCK_SCREEN', 'lock')
     await this.api.put(api, options).then(
       response => {
+        self.event.$emit('LOCK_SCREEN', 'unlock')
         // server error
         if (response.data.error) {
           self.event.$emit('SHOW_MESSAGE', response.data.error)
@@ -162,8 +167,10 @@ class Utils {
 
     let responseData = null
     // server response should be {error: errorcode, data: json}
+    self.event.$emit('LOCK_SCREEN', 'lock')
     await this.api.delete(api, options).then(
       response => {
+        self.event.$emit('LOCK_SCREEN', 'unlock')
         // server error
         if (response.data.error) {
           self.event.$emit('SHOW_MESSAGE', response.data.error)
@@ -189,11 +196,93 @@ class Utils {
     })
   }
   socketEmit(event, params) {
+    if (!this.socket) {
+      return
+    }
     if (this.socket.connected) {
       this.socket.emit(event, params)
     }
     else {
       this.event.$emit('SHOW_MESSAGE', 'S005')
+    }
+  }
+  formatDate(date) {
+    if (!date) {
+      return ''
+    }
+    let jdate = new Date(date)
+    return [
+      jdate.getFullYear(),
+      jdate.getMonth() + 1,
+      jdate.getDate()
+    ].join('/')
+  }
+  formatTime(date) {
+    if (!date) {
+      return ''
+    }
+    let jdate = new Date(date)
+    return ('0' + jdate.getHours()).slice(-2) + ':'
+      + ('0' + jdate.getMinutes()).slice(-2) + ':'
+      + ('0' + jdate.getSeconds()).slice(-2)
+  }
+  formatDateTime(date) {
+    if (!date) {
+      return ''
+    }
+    return this.formatDate(date) + ' ' + this.formatTime(date)
+  }
+  formatMoney(number, local, locals) {
+    if (!number && number != 0) {
+      return ''
+    }
+    let fixed = number.toFixed(locals[local]["tofix"])
+    let delimiter = '.'
+    let splitedNum = fixed.toString().split(delimiter)
+    let replacedNum = splitedNum[0].replace(/(\d)(?=(\d{3})+$)/g , '$1,')
+    if (splitedNum[1]) {
+      replacedNum = replacedNum + delimiter + splitedNum[1]
+    }
+    return locals[local]["currencys"] + replacedNum
+  }
+  formatNumber(number) {
+    if (!number && number != 0) {
+      return ''
+    }
+    let delimiter = '.'
+    let splitedNum = number.toString().split(delimiter)
+    let replacedNum = splitedNum[0].replace(/(\d)(?=(\d{3})+$)/g , '$1,')
+    if (splitedNum[1]) {
+      replacedNum = replacedNum + delimiter + splitedNum[1]
+    }
+    return replacedNum
+  }
+  formatPercentage(number) {
+    if (!number && number != 0) {
+      return ''
+    }
+    let per = Math.round(number * 10000) / 100
+    return per + '%'
+  }
+  formatSize(size) {
+    if (!size && size != 0) {
+      return ''
+    }
+    if (size < 1000) {
+      return size + ' Byte'
+    }
+    else if (size < 1024 * 1024 * 5) {
+      let ksize = size / 1024
+      let delimiter = '.'
+      let splitedNum = ksize.toString().split(delimiter)
+      let replacedNum = splitedNum[0].replace(/(\d)(?=(\d{3})+$)/g , '$1,')
+      return replacedNum + ' KB'
+    } else {
+      let ksize = size / 1024 / 1024
+      let delimiter = '.'
+      let splitedNum = ksize.toString().split(delimiter)
+      let replacedNum = splitedNum[0].replace(/(\d)(?=(\d{3})+$)/g , '$1,')
+      return replacedNum + ' MB'
     }
   }
 }

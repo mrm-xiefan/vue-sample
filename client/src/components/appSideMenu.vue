@@ -12,7 +12,7 @@
           <span class="small" v-if="manager.socket">{{manager.socket.id}}</span>
         </div>
       </div>
-      <ul class="sidebar-menu">
+      <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li :class="{'treeview': true, 'active': manager.controller.currentApp == 'app1' || manager.controller.currentApp == 'app2'}">
           <a href="#">

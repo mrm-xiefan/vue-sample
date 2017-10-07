@@ -1,8 +1,9 @@
 <template>
   <div class="wrapper">
+    <lockScreen :manager="manager"></lockScreen>
     <appHeader :manager="manager"></appHeader>
     <appSideMenu :manager="manager"></appSideMenu>
-    <app1Body :manager="manager" :files="files"></app1Body>
+    <app1Body :manager="manager"></app1Body>
     <appFooter :manager="manager"></appFooter>
     <messageModal :manager="manager"></messageModal>
     <uploadModal :manager="manager"></uploadModal>
@@ -16,6 +17,7 @@
   import manager from '@/store/manager.js'
   import utils from '@/tool/utils.js'
 
+  import lockScreen from '@/components/parts/lockScreen'
   import appHeader from '@/components/appHeader'
   import appSideMenu from '@/components/appSideMenu'
   import app1Body from '@/components/app1Body'
@@ -25,12 +27,8 @@
   import appControlPanel from '@/components/appControlPanel'
   export default {
     props: ['manager'],
-    data() {
-      return {
-        files: []
-      }
-    },
     components: {
+      lockScreen: lockScreen,
       appHeader: appHeader,
       appSideMenu: appSideMenu,
       app1Body: app1Body,
@@ -40,14 +38,13 @@
       appControlPanel: appControlPanel
     },
     created() {
-      let self = this
-      utils.event.$on('ADD_FILES', (files) => {
-        // self.files.splice(0, self.files.length)
-        for (let i = 0; i < files.length; i ++) {
-          self.files.push(files[i])
-        }
+      utils.event.$on('SOCKET_INITIALIZE', () => {
+        utils.socketEmit('enterLobby', {})
       })
-    }
+    },
+    mounted() {
+      utils.socketEmit('enterLobby', {})
+    },
   }
 </script>
 

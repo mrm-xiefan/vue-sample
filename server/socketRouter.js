@@ -1,5 +1,6 @@
 import conf from 'config'
 import logger from './logger.js'
+import roomService from './roomService.js'
 
 class socketRouter {
   constructor() {
@@ -17,15 +18,42 @@ class socketRouter {
 
     self.io.sockets.on('connection', (socket) => {
       logger.info('connected: ' + socket.id)
+      let client = roomService.login(socket)
+      roomService.spy()
 
       socket.on('reinit', (params) => {
         logger.info(socket.id + ' reinit: ' + JSON.stringify(params))
+        roomService.recovery(client, params)
         let msg = {}
         socket.emit('reinited', msg)
+        roomService.spy()
+      })
+
+      socket.on('enterLobby', (params) => {
+        logger.info('enterLobby: ' + socket.id)
+        roomService.enterLobby(client)
+        roomService.spy()
+      })
+
+      socket.on('enterChatRoom', (params) => {
+        logger.info('enterChatRoom: ' + socket.id)
+        if (roomService.enterChatRoom(client)) {
+          // chatService.getChats((error, chats, count) => {
+          //   if (error) {
+          //     socket.emit('processError', error)
+          //   }
+          //   else {
+          //     socket.emit('initChatRoom', {chats: chats, count: count})
+          //   }
+          // })
+        }
+        roomService.spy()
       })
 
       socket.on('disconnect', () => {
         logger.info('disconnect: ' + socket.id)
+        roomService.logout(client)
+        roomService.spy()
       })
     })
   }

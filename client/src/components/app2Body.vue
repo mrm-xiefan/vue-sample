@@ -16,9 +16,7 @@
   export default {
     props: ['manager', 'object'],
     mounted() {
-      if ($.AdminLTE && $.AdminLTE.layout) {
-        $.AdminLTE.layout.fix()
-      }
+      $('body').layout('fix')
     },
     methods: {
       closeSide() {

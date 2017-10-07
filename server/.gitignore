@@ -1,5 +1,6 @@
 .DS_Store
 node_modules/
-*.log
+*.log*
 upload/*
 !upload/.gitkeep
+package-lock.json

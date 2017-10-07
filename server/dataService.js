@@ -29,7 +29,7 @@ class dataService {
       params[field] = value
     })
 
-    form.on('fileBegin', (name, file) => {
+    form.on('fileBegin', (field, file) => {
       let folder = uuid.v4()
       file.path = path.join(__dirname, 'upload', folder, file.name)
       fs.mkdirSync(path.join(__dirname, 'upload', folder))
@@ -42,10 +42,14 @@ class dataService {
       })
     })
 
-    // form.on('file', (field, file) => {
-    //   logger.debug('received one file: ' + file.path)
-    //   logger.debug('name: ' + file.name)
-    // })
+    form.on('file', (field, file) => {
+      for (let i = 0; i < localFileList.length; i ++) {
+        if (localFileList[i].fullname == file.path) {
+          localFileList[i].size = file.size
+          break
+        }
+      }
+    })
 
     form.on('end', () => {
       let fileList = []
@@ -92,15 +96,15 @@ class dataService {
         let thumbnailFullname = path.join(__dirname, 'upload', localFileList[idx].folder, thumbnailName)
         sharp(localFileList[idx].fullname)
           .rotate()
-          .resize(500, 500)
+          .resize(500)
           .limitInputPixels(0)
-          .max()
+          // .max()
           .toFile(thumbnailFullname)
           .then((data) => {
             fileList.push({
-              fullname: localFileList[idx].fullname,
               extname: localFileList[idx].extname,
               type: localFileList[idx].type,
+              size: localFileList[idx].size,
               folder: localFileList[idx].folder,
               name: localFileList[idx].name,
               thumbnail: thumbnailName
@@ -114,9 +118,9 @@ class dataService {
       }
       else {
         fileList.push({
-          fullname: localFileList[idx].fullname,
           extname: localFileList[idx].extname,
           type: localFileList[idx].type,
+          size: localFileList[idx].size,
           folder: localFileList[idx].folder,
           name: localFileList[idx].name,
           thumbnail: localFileList[idx].name
@@ -125,14 +129,25 @@ class dataService {
       }
     }
     else {
-      fileList.push({
-        fullname: localFileList[idx].fullname,
-        extname: localFileList[idx].extname,
-        type: localFileList[idx].type,
-        folder: localFileList[idx].folder,
-        name: localFileList[idx].name,
-        thumbnail: null
-      })
+      if ((localFileList[idx].type.split('/')[0] == 'image') && (localFileList[idx].type.split('/')[1] != 'vnd.adobe.photoshop')) {
+        fileList.push({
+          extname: localFileList[idx].extname,
+          type: localFileList[idx].type,
+          size: localFileList[idx].size,
+          folder: localFileList[idx].folder,
+          name: localFileList[idx].name,
+          thumbnail: localFileList[idx].name
+        })
+      } else {
+        fileList.push({
+          extname: localFileList[idx].extname,
+          type: localFileList[idx].type,
+          size: localFileList[idx].size,
+          folder: localFileList[idx].folder,
+          name: localFileList[idx].name,
+          thumbnail: null
+        })
+      }
       self.thumbnail(localFileList, idx + 1, fileList, next)
     }
   }
@@ -155,15 +170,20 @@ class dataService {
         return
       }
       else {
-        self.putOneFileToS3(fileList[idx].folder, fileList[idx].thumbnail, fileList[idx].type, (error) => {
-          if (error) {
-            next(error)
-            return
-          }
-          else {
-            self.putOneSetToS3(fileList, idx + 1, next)
-          }
-        })
+        if (fileList[idx].thumbnail && fileList[idx].name != fileList[idx].thumbnail) {
+          self.putOneFileToS3(fileList[idx].folder, fileList[idx].thumbnail, fileList[idx].type, (error) => {
+            if (error) {
+              next(error)
+              return
+            }
+            else {
+              self.putOneSetToS3(fileList, idx + 1, next)
+            }
+          })
+        }
+        else {
+          self.putOneSetToS3(fileList, idx + 1, next)
+        }
       }
     })
   }
