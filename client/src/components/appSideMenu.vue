@@ -12,7 +12,7 @@
           <span class="small" v-if="manager.socket">{{manager.socket.id}}</span>
         </div>
       </div>
-      <ul class="sidebar-menu" data-widget="tree">
+      <ul id='side-menu-tree' class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li :class="{'treeview': true, 'active': manager.controller.currentApp == 'app1' || manager.controller.currentApp == 'app2'}">
           <a href="#">
@@ -48,8 +48,20 @@
 </template>
 
 <script>
+  import CONST from '@/store/const.js'
+  import manager from '@/store/manager.js'
+  import utils from '@/tool/utils.js'
+
   export default {
-    props: ['manager']
+    props: ['manager'],
+    mounted() {
+      $('#side-menu-tree').tree()
+    },
+    updated() {
+      this.$nextTick(() => {
+        $('#side-menu-tree').tree()
+      })
+    }
   }
 </script>
 

@@ -45,5 +45,6 @@ mongo.init(() => {
 
 
 app.get('/upload/*', (req, res) => {
-  res.sendFile(path.join(__dirname, req.url))
+  let url = decodeURI(req.url)
+  res.sendFile(path.join(__dirname, url))
 })

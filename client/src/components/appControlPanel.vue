@@ -2,7 +2,7 @@
   <aside class="control-sidebar control-sidebar-dark">
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
       <li class="active"><a href="#control-sidebar-tab1" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-tab2" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+      <li v-if="manager.controller.currentApp == 'app1'"><a href="#control-sidebar-tab2" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
     </ul>
     <div class="tab-content">
       <div class="tab-pane active" id="control-sidebar-tab1">
@@ -26,7 +26,7 @@
           </li>
         </ul>
       </div>
-      <div class="tab-pane" id="control-sidebar-tab2">
+      <div class="tab-pane" id="control-sidebar-tab2" v-if="manager.controller.currentApp == 'app1'">
         <h3 class="control-sidebar-heading">Tab2</h3>
       </div>
     </div>
@@ -34,11 +34,12 @@
 </template>
 
 <script>
+  import CONST from '@/store/const.js'
+  import manager from '@/store/manager.js'
+  import utils from '@/tool/utils.js'
+
   export default {
-    props: ['manager'],
-    mounted() {
-      $('body').layout('fixSidebar')
-    }
+    props: ['manager']
   }
 </script>
 

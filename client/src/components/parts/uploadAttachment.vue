@@ -49,7 +49,10 @@
       let self = this
       let uploadUrl = ''
       if (manager.controller.cors) {
-        uploadUrl = CONST.developHost + 'digitalboard/uq/'
+        uploadUrl = CONST.developHost
+      }
+      else {
+        uploadUrl = '/'
       }
       uploadUrl += 'api/uploadFiles'
       $('#upload-input-attachment').fileinput(
@@ -66,21 +69,21 @@
           // showCancel: false,
           showClose: false,
           showBrowse: true,
-          showPreview: false,
+          showPreview: true,
           browseOnZoneClick: false,
           // removeFromPreviewOnError: false,
-          // previewFileIcon: '<i class="fa fa-file"></i>&nbsp;',
-          browseIcon: '<i class="fa fa-paperclip"></i>&nbsp;',
+          // previewFileIcon: '<i class="fa fa-file"></i>',
+          browseIcon: '<i class="fa fa-paperclip"></i>',
           browseLabel: 'Attachment',
           browseClass: 'btn btn-default',
-          removeIcon: '<i class="fa fa-chain-broken"></i>&nbsp;',
+          removeIcon: '<i class="fa fa-chain-broken"></i>',
           removeLabel: 'Clear',
           removeClass: 'btn btn-default',
-          cancelIcon: '<i class="fa fa-ban"></i>&nbsp;',
+          cancelIcon: '<i class="fa fa-ban"></i>',
           cancelClass: 'btn btn-default',
-          uploadIcon: '<i class="fa fa-upload"></i>&nbsp;',
+          uploadIcon: '<i class="fa fa-upload"></i>',
           uploadClass: 'btn btn-default',
-          // msgValidationErrorIcon: '<i class="fa fa-info-circle"></i>&nbsp;',
+          // msgValidationErrorIcon: '<i class="fa fa-info-circle"></i>',
           fileActionSettings: {
             showRemove: true,
             removeIcon: '<i class="fa fa-trash"></i>',

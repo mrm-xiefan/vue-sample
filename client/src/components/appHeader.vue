@@ -23,8 +23,20 @@
 </template>
 
 <script>
+  import CONST from '@/store/const.js'
+  import manager from '@/store/manager.js'
+  import utils from '@/tool/utils.js'
+
   export default {
-    props: ['manager']
+    props: ['manager'],
+    methods: {
+      backward() {
+        this.$router.go(-1)
+      },
+      goTop() {
+        $('html, body').animate({scrollTop: 0}, 'fast')
+      }
+    }
   }
 </script>
 

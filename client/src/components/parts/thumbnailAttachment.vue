@@ -63,7 +63,10 @@
       let self = this
       let uploadUrl = ''
       if (manager.controller.cors) {
-        uploadUrl = CONST.developHost + 'digitalboard/uq/'
+        uploadUrl = CONST.developHost
+      }
+      else {
+        uploadUrl = '/'
       }
       uploadUrl += 'api/uploadFiles'
       let initialPreview = []
@@ -86,18 +89,18 @@
           showBrowse: true,
           browseOnZoneClick: true,
           // removeFromPreviewOnError: false,
-          // previewFileIcon: '<i class="fa fa-file"></i>&nbsp;',
-          browseIcon: '<i class="fa fa-folder-open-o"></i>&nbsp;',
+          // previewFileIcon: '<i class="fa fa-file"></i>',
+          browseIcon: '<i class="fa fa-folder-open-o"></i>',
           browseLabel: 'Browse',
           browseClass: 'btn btn-default',
-          removeIcon: '<i class="fa fa-trash"></i>&nbsp;',
+          removeIcon: '<i class="fa fa-trash"></i>',
           removeLabel: 'Clear',
           removeClass: 'btn btn-default',
-          cancelIcon: '<i class="fa fa-ban"></i>&nbsp;',
+          cancelIcon: '<i class="fa fa-ban"></i>',
           cancelClass: 'btn btn-default',
-          uploadIcon: '<i class="fa fa-upload"></i>&nbsp;',
+          uploadIcon: '<i class="fa fa-upload"></i>',
           uploadClass: 'btn btn-default',
-          // msgValidationErrorIcon: '<i class="fa fa-info-circle"></i>&nbsp;',
+          // msgValidationErrorIcon: '<i class="fa fa-info-circle"></i>',
           fileActionSettings: {
             showRemove: false,
             removeIcon: '<i class="fa fa-trash"></i>',

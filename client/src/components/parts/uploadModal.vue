@@ -60,23 +60,23 @@
           maxFilesNum: 20,
           maxFileSize: 2000000,
           // previewFileType: 'any',
-          showCaption: true,
+          // showCaption: true,
           // showUpload: false,
           // showRemove: false,
-          // showCancel: false,
+          showCancel: false,
           showClose: false,
           showBrowse: true,
           browseOnZoneClick: true,
           // removeFromPreviewOnError: false,
-          // previewFileIcon: '<i class="fa fa-file"></i>&nbsp;',
-          browseIcon: '<i class="fa fa-folder-open-o"></i>&nbsp;',
-          removeIcon: '<i class="fa fa-trash"></i>&nbsp;',
+          // previewFileIcon: '<i class="fa fa-file"></i>',
+          browseIcon: '<i class="fa fa-folder-open-o"></i>',
+          removeIcon: '<i class="fa fa-trash"></i>',
           removeClass: 'btn btn-primary',
-          cancelIcon: '<i class="fa fa-ban"></i>&nbsp;',
+          cancelIcon: '<i class="fa fa-ban"></i>',
           cancelClass: 'btn btn-primary',
-          uploadIcon: '<i class="fa fa-upload"></i>&nbsp;',
+          uploadIcon: '<i class="fa fa-upload"></i>',
           uploadClass: 'btn btn-primary',
-          // msgValidationErrorIcon: '<i class="fa fa-info-circle"></i>&nbsp;',
+          // msgValidationErrorIcon: '<i class="fa fa-info-circle"></i>',
           fileActionSettings: {
             showRemove: true,
             removeIcon: '<i class="fa fa-trash"></i>',
@@ -158,7 +158,7 @@
             video:
               '<div class="file-preview-frame{frameClass}" id="{previewId}" data-fileindex="{fileindex}" data-template="{template}" title="{caption}" ' + 'style="float: left; padding-bottom: 5px; margin: 0px 5px 5px 0px; width: {width}; height: {height}; border: 0px; border-color: #141a1d; border-radius: 4px; box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);"' + '>\n' +
                 '<div class="kv-file-content">' +
-                  '<video class="kv-preview-data" width="{width}" height="{height}" controls>\n' +
+                  '<video class="kv-preview-data" width="100%" height="{height}" controls>\n' +
                     '<source src="{data}" type="{type}">\n' +
                     '<div class="file-preview-other">\n' +
                       '<span class="{previewFileIconClass}">{previewFileIcon}</span>\n' +
