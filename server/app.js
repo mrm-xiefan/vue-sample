@@ -1,24 +1,24 @@
 import log4js from 'log4js'
 import logger from './logger.js'
-logger.info('NODE_ENV: ', process.env.NODE_ENV)
 import express from 'express'
 import mongo from './mongo.js'
 import path from 'path'
-import favicon from 'serve-favicon'
 import bodyParser from 'body-parser'
 import conf from 'config'
 import http from 'http'
 import httpRouter from './httpRouter.js'
 import socketRouter from './socketRouter.js'
 
+logger.info('NODE_ENV:', process.env.NODE_ENV)
+logger.info('mode:', conf.mode)
+
 let port = conf.port
 
 let app = express()
 
 app.set('views', path.join(__dirname, '..', 'dist'))
-app.use(bodyParser.json({limit: '50mb'}))
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}))
-app.use(favicon(path.join(__dirname, '..', 'favicon.ico')))
+app.use(bodyParser.json({limit: '2gb'}))
+app.use(bodyParser.urlencoded({limit: '2gb', extended: true}))
 app.use(express.static(path.join(__dirname, 'upload')), express.static(path.join(__dirname, '..', 'dist')))
 app.use(log4js.connectLogger(logger))
 app.use(httpRouter)

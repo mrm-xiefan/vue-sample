@@ -22,7 +22,7 @@
   import appSideMenu from '@/components/appSideMenu'
   import app1Body from '@/components/app1Body'
   import appFooter from '@/components/appFooter'
-  import messageModal from '@/components/messageModal'
+  import messageModal from '@/components/parts/messageModal'
   import uploadModal from '@/components/parts/uploadModal'
   import appControlPanel from '@/components/appControlPanel'
   export default {

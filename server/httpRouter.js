@@ -98,7 +98,7 @@ router.post('/api/uploadFiles', (req, res, next) => {
       logger.info('params: '+JSON.stringify(params))
       let files = []
       for (let i = 0; i < list.length; i ++) {
-        if (process.env.NODE_ENV == 'development') {
+        if (conf.mode == 'local') {
           files.push({
             file: conf.endpoint + 'upload/' + list[i].folder + '/' + list[i].name,
             thumbnail: list[i].thumbnail? (conf.endpoint + 'upload/' + list[i].folder + '/' + list[i].thumbnail): null,

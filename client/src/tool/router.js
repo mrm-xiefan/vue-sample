@@ -9,8 +9,10 @@ import utils from '@/tool/utils.js'
 
 Vue.use(Router)
 
+// this.$router.push({name: 'app2', query: {something: 'sss'}})
 let getApp1Data = (to, from, next) => {
-  // utils.restGet('/api/getApp1Data').then(
+  // let param = to.query.something
+  // utils.restGet('/api/getApp1Data', {param: param}).then(
   //   response => {
   //     if (response) {
         next()
@@ -21,8 +23,8 @@ let getApp1Data = (to, from, next) => {
 
 export default new Router({
   routes: [
-    {path: '/', component: app1, beforeEnter: getApp1Data},
-    {path: '/app2', component: app2},
-    {path: '*', redirect: '/'}
+    {name: 'app1', path: '/app1', component: app1, beforeEnter: getApp1Data},
+    {name: 'app2', path: '/app2', component: app2},
+    {path: '*', redirect: '/app1'}
   ]
 })

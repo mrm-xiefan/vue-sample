@@ -21,7 +21,7 @@
   import appSideMenu from '@/components/appSideMenu'
   import app2Body from '@/components/app2Body'
   import appFooter from '@/components/appFooter'
-  import messageModal from '@/components/messageModal'
+  import messageModal from '@/components/parts/messageModal'
   import appControlPanel from '@/components/appControlPanel'
   export default {
     props: ['manager'],

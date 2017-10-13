@@ -59,6 +59,7 @@ class Utils {
       }
     ).catch(
       error => {
+        self.event.$emit('LOCK_SCREEN', 'unlock')
         // if (error.response) {
         //   console.log(error.response.headers)
         // }
@@ -106,6 +107,7 @@ class Utils {
       }
     ).catch(
       error => {
+        self.event.$emit('LOCK_SCREEN', 'unlock')
         // network error
         self.event.$emit('SHOW_MESSAGE', 'S001')
         responseData = {error: 'S001', data: null}
@@ -142,6 +144,7 @@ class Utils {
       }
     ).catch(
       error => {
+        self.event.$emit('LOCK_SCREEN', 'unlock')
         // network error
         self.event.$emit('SHOW_MESSAGE', 'S001')
         responseData = {error: 'S001', data: null}
@@ -179,6 +182,7 @@ class Utils {
       }
     ).catch(
       error => {
+        self.event.$emit('LOCK_SCREEN', 'unlock')
         // network error
         self.event.$emit('SHOW_MESSAGE', 'S001')
         responseData = {error: 'S001', data: null}
@@ -232,18 +236,18 @@ class Utils {
     }
     return this.formatDate(date) + ' ' + this.formatTime(date)
   }
-  formatMoney(number, local, locals) {
+  formatMoney(number) {
     if (!number && number != 0) {
       return ''
     }
-    let fixed = number.toFixed(locals[local]["tofix"])
+    let fixed = number.toFixed(2)
     let delimiter = '.'
     let splitedNum = fixed.toString().split(delimiter)
     let replacedNum = splitedNum[0].replace(/(\d)(?=(\d{3})+$)/g , '$1,')
     if (splitedNum[1]) {
       replacedNum = replacedNum + delimiter + splitedNum[1]
     }
-    return locals[local]["currencys"] + replacedNum
+    return '¥' + replacedNum
   }
   formatNumber(number) {
     if (!number && number != 0) {

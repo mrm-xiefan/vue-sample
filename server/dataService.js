@@ -129,7 +129,7 @@ class dataService {
       }
     }
     else {
-      if ((localFileList[idx].type.split('/')[0] == 'image') && (localFileList[idx].type.split('/')[1] != 'vnd.adobe.photoshop')) {
+      if ((localFileList[idx].type.split('/')[0] == 'image') && (localFileList[idx].type.split('/')[1] != 'vnd.adobe.photoshop') ) {
         fileList.push({
           extname: localFileList[idx].extname,
           type: localFileList[idx].type,
@@ -152,7 +152,7 @@ class dataService {
     }
   }
   putToS3(fileList, next) {
-    if (process.env.NODE_ENV == 'development') {
+    if (conf.mode == 'local') {
       next(null)
       return
     }

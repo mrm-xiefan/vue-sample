@@ -21,7 +21,7 @@
           </a>
           <ul class="treeview-menu">
             <li :class="{'active': manager.controller.currentApp == 'app1'}">
-              <router-link to="/">
+              <router-link to="/app1">
                 <i class="fa fa-circle-o"></i> app1
               </router-link>
             </li>
@@ -33,7 +33,7 @@
           </ul>
         </li>
         <li :class="{'active': manager.controller.currentApp == 'app1'}">
-          <router-link to="/">
+          <router-link to="/app1">
             <i class="fa fa-th"></i> <span>app1</span>
           </router-link>
         </li>

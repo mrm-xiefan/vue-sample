@@ -4,10 +4,13 @@
   "cors": [
     "http://localhost:8000"
   ],
+  "mode": "local",
   "image": ["JPG", "JPEG", "PNG", "TIF", "TIFF", "SVG"],
   "socketPath": "/socket.io",
   "mongo": {
-    "url": "mongodb://localhost:27017/local",
-    "limit": 15
+    "server": "127.0.0.1",
+    "port": 27017,
+    "db": "sample",
+    "limit": 10
   }
 }

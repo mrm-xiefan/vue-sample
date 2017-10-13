@@ -1,14 +1,16 @@
-import MongoClient from 'mongodb'
 import conf from 'config'
 import logger from './logger.js'
+import mongodb from 'mongodb'
 
-class mongo {
+class Mongo {
   constructor() {
   }
   init(next) {
     let self = this
     this.db = null
-    MongoClient.connect(conf.mongo.url, (error, mongodb) => {
+
+    let db = new mongodb.Db(conf.mongo.db, new mongodb.Server(conf.mongo.server, conf.mongo.port), {safe: false})
+    db.open((error, mongodb) => {
       if (error) {
         logger.error('connect error:' + JSON.stringify(error))
       }
@@ -152,4 +154,4 @@ class mongo {
   }
 }
 
-export default new mongo()
+export default new Mongo()

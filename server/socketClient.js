@@ -21,7 +21,7 @@ class Client {
   }
   destroy() {
     if (this.room) {
-      this.socket.leave(this.room.name)
+      this.socket.leave(this.room.id)
       this.room.exit(this)
       this.room = null
     }
