@@ -98,10 +98,10 @@ router.post('/api/uploadFiles', (req, res, next) => {
       logger.info('params: '+JSON.stringify(params))
       let files = []
       for (let i = 0; i < list.length; i ++) {
-        if (conf.mode == 'local') {
+        if (conf.s3.mode == 'local') {
           files.push({
-            file: conf.endpoint + 'upload/' + list[i].folder + '/' + list[i].name,
-            thumbnail: list[i].thumbnail? (conf.endpoint + 'upload/' + list[i].folder + '/' + list[i].thumbnail): null,
+            file: conf.endpoint + 'static/upload/' + list[i].folder + '/' + list[i].name,
+            thumbnail: list[i].thumbnail? (conf.endpoint + 'static/upload/' + list[i].folder + '/' + list[i].thumbnail): null,
             folder: list[i].folder,
             name: list[i].name,
             type: list[i].type,
@@ -110,8 +110,8 @@ router.post('/api/uploadFiles', (req, res, next) => {
         }
         else {
           files.push({
-            file: conf.s3.base + conf.s3.path + list[i].folder + '/' + list[i].name,
-            thumbnail: list[i].thumbnail? (conf.s3.web + conf.s3.path + list[i].folder + '/' + list[i].thumbnail): null,
+            file: '/static/s3/upload/' + list[i].folder + '/' + list[i].name,
+            thumbnail: list[i].thumbnail? ('/static/s3/upload/' + list[i].folder + '/' + list[i].thumbnail): null,
             folder: list[i].folder,
             name: list[i].name,
             type: list[i].type,

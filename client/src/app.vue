@@ -15,7 +15,7 @@
         manager.socket = io(CONST.developHost, {path: CONST.socketpath})
       }
       else {
-        manager.socket = io(location.host)
+        manager.socket = io(location.host, {path: CONST.socketpath})
       }
       manager.socket.on('connect', () => {
         utils.socket = manager.socket

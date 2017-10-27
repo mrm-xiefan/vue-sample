@@ -12,5 +12,12 @@
     "port": 27017,
     "db": "sample",
     "limit": 10
+  },
+  "s3": {
+    "mode": "local",
+    "bucket": "any-bucket",
+    "secret": "sss",
+    "key": "kkk",
+    "path": "upload"
   }
 }

@@ -230,6 +230,7 @@
       )
       $('#upload-input').on('filepreajax', (event, previewId, index) => {
         $('#close-upload').hide()
+        utils.event.$emit('LOCK_SCREEN', 'lock')
       })
       // $('#upload-input').on('fileloaded', () => {
       //   let cnt = $(this).closest('.file-input').find('.file-preview-frame').size()
@@ -240,6 +241,7 @@
       //   }
       // })
       $('#upload-input').on('filebatchuploadsuccess', (event, data, previewId, index) => {
+        utils.event.$emit('LOCK_SCREEN', 'unlock')
         let form = data.form, files = data.files, extra = data.extra, response = data.response, reader = data.reader
         if (!response.error) {
           if (self.next) {
@@ -260,9 +262,11 @@
       // $('#upload-input').on('fileuploaderror', (event, numFiles, label) => {
       // })
       $('#upload-input').on('fileuploaderror', (event, numFiles, label) => {
+        utils.event.$emit('LOCK_SCREEN', 'unlock')
         $('#close-upload').show()
       })
       $('#upload-input').on('filebatchuploaderror', (event, numFiles, label) => {
+        utils.event.$emit('LOCK_SCREEN', 'unlock')
         $('#upload-input').fileinput('clear')
         $('#close-upload').show()
         $('#upload-modal').modal('hide')

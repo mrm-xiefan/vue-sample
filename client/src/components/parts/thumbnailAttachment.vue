@@ -33,6 +33,7 @@
           else {
             self.error = null
           }
+          utils.event.$emit('LOCK_SCREEN', 'lock')
           $('#thumbnail-attachment').fileinput('upload')
         }
         else {
@@ -161,6 +162,7 @@
         }
       )
       $('#thumbnail-attachment').on('filebatchuploadsuccess', (event, data, previewId, index) => {
+        utils.event.$emit('LOCK_SCREEN', 'unlock')
         let form = data.form, files = data.files, extra = data.extra, response = data.response, reader = data.reader
         if (!response.error) {
           if (self.next) {
@@ -184,6 +186,7 @@
       // $('#thumbnail-attachment').on('fileuploaderror', (event, numFiles, label) => {
       // })
       $('#thumbnail-attachment').on('filebatchuploaderror', (event, numFiles, label) => {
+        utils.event.$emit('LOCK_SCREEN', 'unlock')
         $('#thumbnail-attachment').fileinput('clear')
         utils.event.$emit('SHOW_MESSAGE', 'S006')
         if (self.error) {

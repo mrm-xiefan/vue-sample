@@ -152,7 +152,7 @@ class dataService {
     }
   }
   putToS3(fileList, next) {
-    if (conf.mode == 'local') {
+    if (conf.s3.mode == 'local') {
       next(null)
       return
     }
@@ -177,11 +177,21 @@ class dataService {
               return
             }
             else {
+              fs.rmdir(path.join(__dirname, 'upload', fileList[idx].folder), (del_error) => {
+                if (del_error) {
+                  logger.error(fileList[idx].folder, "|", JSON.stringify(del_error))
+                }
+              })
               self.putOneSetToS3(fileList, idx + 1, next)
             }
           })
         }
         else {
+          fs.rmdir(path.join(__dirname, 'upload', fileList[idx].folder), (del_error) => {
+            if (del_error) {
+              logger.error(fileList[idx].folder, "|", JSON.stringify(del_error))
+            }
+          })
           self.putOneSetToS3(fileList, idx + 1, next)
         }
       }
@@ -202,7 +212,7 @@ class dataService {
     }).promise().then((data) => {
       utils.deleteFile(sourceFile, (del_error) => {
         if (del_error) {
-          logger.error(sourceFile + "|" + del_error)
+          logger.error(sourceFile, "|", JSON.stringify(del_error))
         }
       })
       next(null, data)

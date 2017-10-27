@@ -13,8 +13,10 @@
     "limit": 10
   },
   "s3": {
-    "bucket": "bucketname",
-    "path": "path/to/somewhere",
-    "web": "https://webaccesspoint/"
+    "mode": "local",
+    "bucket": "any-bucket",
+    "secret": "sss",
+    "key": "kkk",
+    "path": "upload"
   }
 }

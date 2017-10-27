@@ -237,7 +237,7 @@ class Utils {
     return this.formatDate(date) + ' ' + this.formatTime(date)
   }
   formatMoney(number) {
-    if (!number && number != 0) {
+    if (!number && number !== 0) {
       return ''
     }
     let fixed = number.toFixed(2)
@@ -250,7 +250,7 @@ class Utils {
     return '¥' + replacedNum
   }
   formatNumber(number) {
-    if (!number && number != 0) {
+    if (!number && number !== 0) {
       return ''
     }
     let delimiter = '.'
@@ -262,14 +262,14 @@ class Utils {
     return replacedNum
   }
   formatPercentage(number) {
-    if (!number && number != 0) {
+    if (!number && number !== 0) {
       return ''
     }
     let per = Math.round(number * 10000) / 100
     return per + '%'
   }
   formatSize(size) {
-    if (!size && size != 0) {
+    if (!size && size !== 0) {
       return ''
     }
     if (size < 1000) {
