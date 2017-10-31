@@ -129,7 +129,7 @@ class dataService {
       }
     }
     else {
-      if ((localFileList[idx].type.split('/')[0] == 'image') && (localFileList[idx].type.split('/')[1] != 'vnd.adobe.photoshop') ) {
+      if ((localFileList[idx].type.split('/')[0] == 'image') && (localFileList[idx].type.split('/')[1].indexOf('octet-stream') != -1 || localFileList[idx].type.split('/')[1].indexOf('photoshop') != -1 || localFileList[idx].type.split('/')[1].indexOf('psd') != -1)) {
         fileList.push({
           extname: localFileList[idx].extname,
           type: localFileList[idx].type,

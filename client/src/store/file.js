@@ -36,7 +36,7 @@ class File {
       return 'video'
     }
     else if (types[0] == 'image') {
-      if (types[1] && types[1] == 'vnd.adobe.photoshop') {
+      if (types[1] && (types[1].indexOf('octet-stream') != -1 || types[1].indexOf('photoshop') != -1 || types[1].indexOf('psd') != -1)) {
         return 'other'
       }
       else {
@@ -99,9 +99,6 @@ class File {
     if (type.indexOf('quicktime') != -1 ) {
       return rootpath + 'mov.png'
     }
-    if (type.indexOf('quicktime') != -1 ) {
-      return rootpath + 'mov.png'
-    }
     if (type.indexOf('mpeg') != -1) {
       return rootpath + 'mpeg.png'
     }
@@ -123,10 +120,10 @@ class File {
     if (type.indexOf('postscript') != -1) {
       return rootpath + 'ai.png'
     }
-    if (type.indexOf('photoshop') != -1) {
+    if (type.indexOf('octet-stream') != -1 || type.indexOf('photoshop') != -1 || type.indexOf('psd') != -1) {
       return rootpath + 'psd.png'
     }
-    if (type.indexOf('octet-stream') != -1) {
+    if (type.indexOf('vnd.ms-visio.viewer') != -1) {
       return rootpath + 'vsd.png'
     }
     if (type.indexOf('zip') != -1) {
