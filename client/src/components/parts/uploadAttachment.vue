@@ -274,24 +274,6 @@
   }
 </script>
 
-<style>
-  .file-thumbnail-footer {
-    padding: 10px;
-    font-size: 12px;
-    background: #fff;
-  }
-  .file-footer-caption {
-    margin-bottom: 8px;
-  }
-  .file-thumbnail-footer .btn {
-    border-radius: 0px;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border: 1px solid #ddd;
-    font-weight: 100;
-    font-size: 12px;
-    padding: 5px 15px;
-  }
-</style>
 <style scoped>
+
 </style>

@@ -126,7 +126,7 @@
             preview:
               '<div class="file-preview" style="min-height: 205px; width: 100%; border-radius: 5px; border: 1px solid #ddd; padding: 5px; margin-bottom: 5px;">\n' +
                 '{close}' +
-                '<div class="{dropClass}" style="font-size: 20px; min-height: 205px; padding: 5px; border: 1px dashed #aaa; border-radius: 4px; height: 100%; text-align: center; vertical-align: middle;">\n' +
+                '<div class="{dropClass}" style="font-size: 20px; min-height: 205px; padding: 0px; border: none; height: 100%; text-align: center; vertical-align: middle;">\n' +
                   '<div class="file-preview-thumbnails" style="font-size: 14px; overflow: hidden; width: 100%;">\n' +
                   '</div>\n' +
                   '<div class="clearfix"></div>' +
