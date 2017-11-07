@@ -5,7 +5,7 @@
 
 # some points for starter
 
-## 1. you can't use => in vue component
+## 1. you can't use => in vue component methods
 
 this happens because the ES6/2015 arrow function syntax `(() => {})` binds this to the parent context. to fix this, you'll need to use a normal function declaration:
 
@@ -27,11 +27,11 @@ mounted() {
 
 send your event any where like this: `utils.socketEmit('someEvent', params)`.
 
-listen server's message at [src/app.vue](./src/app.vue).
+listen server's message at [src/store/manager.js](./src/store/manager.js).
 
 ## 3. test rest api
 
-change **cors** in [src/store/controller.js](./src/store/controller.js) to use cross region rest api. start backend service(reference [../server/README.md](../server/README.md)).
+change **cors** in [src/store/controller.js](./src/store/controller.js) to use cross region rest api. do't forget starting backend service(reference [../server/README.md](../server/README.md)).
 
 also you can customize your dummy response without using real api. just write `utils.restGet('/api/someapi', params, dummyResponse)` to get the dummyResponse.
 
@@ -41,17 +41,13 @@ or write `utils.restGet('/api/someapi', params, null, 'network')` to get an erro
 
 just `npm install somepackage` and then import it at [src/main.js](./src/main.js).
 
-## 5. this SPA sample has two routings
-
-point to http://localhost:8000/app2 to swich routing. defalut routing is http://localhost:8000/.
-
-## 6. use axios instead of ajax
+## 5. use axios instead of ajax
 
 vue-resource is no longer useful.
 
 rapping axios to restGet, restPost, restPut, restDelete in [src/tool/utils.js](./src/tool/utils.js).
 
-## 7. error process
+## 6. error process
 
 it's just my way. i handle **frontend error** like this.
 

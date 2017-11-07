@@ -1,4 +1,5 @@
 import manager from '@/store/manager.js'
+import CONST from './const.js'
 import utils from '@/tool/utils.js'
 
 class File {

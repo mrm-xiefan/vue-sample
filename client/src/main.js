@@ -27,19 +27,12 @@ import utils from '@/tool/utils.js'
 utils.init(manager)
 import Vue from 'vue'
 import router from '@/tool/router.js'
+utils.router = router
 import app from './app'
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
-  let blocks = to.path.replace('/', '').split('/')
-  let target = blocks[0]? blocks[0]: ''
-  if (target == '') {
-    target = 'app1'
-  }
-  if (target != manager.controller.currentApp) {
-    manager.controller.currentApp = target
-  }
-
+  manager.controller.setApp(to)
   next()
 })
 

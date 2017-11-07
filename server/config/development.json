@@ -4,7 +4,6 @@
   "cors": [
     "http://localhost:8000"
   ],
-  "mode": "local",
   "image": ["JPG", "JPEG", "PNG", "TIF", "TIFF", "SVG"],
   "socketPath": "/socket.io",
   "mongo": {
@@ -13,11 +12,22 @@
     "db": "sample",
     "limit": 10
   },
+  "session": {
+    "mode": "mongo",
+    "mongodb": "session",
+    "redisHost": "",
+    "redisPort": 6379,
+    "redisdb": 0,
+    "cookiePath": "/",
+    "cookieMaxAge": 1209600000,
+    "key": "xiefan",
+    "secret": "xiefan-secret"
+  },
   "s3": {
     "mode": "local",
     "bucket": "any-bucket",
-    "secret": "sss",
-    "key": "kkk",
-    "path": "upload"
+    "key": "key-string",
+    "secret": "secret-string",
+    "upload": "upload"
   }
 }

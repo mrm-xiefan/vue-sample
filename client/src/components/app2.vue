@@ -55,7 +55,5 @@
 </script>
 
 <style scoped>
-  .wrapper {
-    height: auto !important
-  }
+
 </style>

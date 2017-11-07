@@ -6,15 +6,11 @@ class socketRouter {
   constructor() {
     this.io = null
   }
-  run(server, store) {
+  init(server, store) {
     let self = this
     self.io = require('socket.io')(server, {path: conf.socketPath})
     // self.io.set('heartbeat interval', 1000)
     // self.io.set('heartbeat timeout', 5000)
-
-    // self.io.use((socket, next) => {
-    //   userService.setUserToSocket(socket, store, next)
-    // })
 
     self.io.sockets.on('connection', (socket) => {
       logger.info('connected: ' + socket.id)

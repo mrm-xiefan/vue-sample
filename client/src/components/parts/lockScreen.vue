@@ -36,9 +36,9 @@
 
 <style scoped>
   .lock-screen-show {
-    background-color: rgba(70, 66, 66, 0.45);
+    background-color: rgba(70, 70, 70, 0.1);
     display: block;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -62,10 +62,10 @@
   /* loading animation */
   .load-animation {
     position: fixed;
-    top: calc(50% - 20px);
-    left: calc(50% - 25px);
-    padding: 27px 0 25px;
-    width: 75px;
+    top: calc(50% - 40px);
+    left: calc(50% - 38px);
+    padding: 26px 0 25px;
+    width: 80px;
     text-align: center;
     background: #605ca8;
   }

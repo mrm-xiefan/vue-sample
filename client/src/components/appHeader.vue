@@ -1,9 +1,9 @@
 <template>
   <header class="main-header">
-    <router-link to="/" class="logo">
+    <a class="logo" v-on:click="triggerIcon()">
       <span class="logo-mini"><b>VueS</b></span>
       <span class="logo-lg">VueSample</span>
-    </router-link>
+    </a>
     <nav class="navbar navbar-static-top">
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
@@ -35,6 +35,9 @@
       },
       goTop() {
         $('html, body').animate({scrollTop: 0}, 'fast')
+      },
+      triggerIcon() {
+        this.$router.push({name: CONST.defaultApp})
       }
     }
   }

@@ -9,7 +9,7 @@
           {{message}}
         </div>
         <div class="modal-footer">
-          <button type="button" :class="{'btn': true, 'btn-primary': type == 'info', 'btn-danger': type == 'warn', 'pull-right': true}" data-dismiss="modal" v-show="type != 'select'">OK</button>
+          <button type="button" :class="{'btn': true, 'btn-primary': type == 'info', 'btn-danger': type == 'warn', 'pull-right': true}" data-dismiss="modal" v-show="type != 'select'" v-on:click="excuteYes">OK</button>
           <button type="button" :class="{'btn': true, 'btn-primary': type == 'select', 'btn-danger': type == 'warn'}" data-dismiss="modal" v-show="type == 'select'" v-on:click="excuteYes">YES</button>
           <button type="button" :class="{'btn': true, 'btn-primary': type == 'select', 'btn-danger': type == 'warn'}" data-dismiss="modal" v-show="type == 'select'" v-on:click="excuteNo">NO</button>
         </div>

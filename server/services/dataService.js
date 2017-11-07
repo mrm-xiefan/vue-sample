@@ -205,7 +205,7 @@ class dataService {
     let sourceFile = path.join(__dirname, 'upload', folder, filename)
     s3.putObject({
       Bucket: conf.s3.bucket,
-      Key: path.join(conf.s3.path, folder, filename),
+      Key: path.join(conf.s3.upload, folder, filename),
       ACL: 'public-read',
       Body: fs.createReadStream(sourceFile),
       ContentType: filetype
@@ -218,7 +218,7 @@ class dataService {
       next(null, data)
     }).catch((error) => {
       logger.error('s3.putObject error: ' + JSON.stringify(error))
-      next('S007')
+      next('S004')
     })
   }
 }

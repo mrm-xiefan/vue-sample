@@ -2,6 +2,7 @@ let CONST = {
   httpTimeout: 120000,
   developHost: 'http://localhost:3000/',
   socketpath: '/socket.io/',
+  defaultApp: 'app1',
   title: {
     'S001': 'ERROR',
     'S002': 'ERROR',
@@ -9,26 +10,28 @@ let CONST = {
     'S004': 'ERROR',
     'S005': 'ERROR',
     'S006': 'ERROR',
-    'S007': 'ERROR',
     'B001': 'INFORMATION',
     'B002': 'INFORMATION',
-    'B010': 'CONFIRM',
+    'B003': 'INFORMATION',
+    'B004': 'INFORMATION',
     'B900': 'ERROR',
-    'I001': 'INFORMATION'
+    'I001': 'INFORMATION',
+    'I002': 'CONFIRM'
   },
   message: {
-    'S001': 'Network Error!',
-    'S002': 'Service Error!',
-    'S003': 'DB Error!',
-    'S004': 'Authenticate Error!',
-    'S005': 'Connection Error!',
-    'S006': 'Upload Error!',
-    'S007': 'S3 Error!',
-    'B001': 'Business Error.',
-    'B002': 'None Data.',
-    'B010': 'Are you sure to delete?',
-    'B900': 'Authencate Error!',
-    'I001': 'Connection Recovered.'
+    'S001': 'Network error!',
+    'S002': 'Service error!',
+    'S003': 'DB error!',
+    'S004': 'S3 error!',
+    'S005': 'Connection lost!',
+    'S006': 'Upload error!',
+    'B001': 'None data.',
+    'B002': 'User name or password is incorrect.',
+    'B003': 'User is already exist.',
+    'B004': 'Incorrect typing.',
+    'B900': 'Authencate error.',
+    'I001': 'Connection recovered.',
+    'I002': 'Are you sure to delete?'
   },
   type: {
     'S001': 'warn',
@@ -37,13 +40,14 @@ let CONST = {
     'S004': 'warn',
     'S005': 'warn',
     'S006': 'warn',
-    'S007': 'warn',
     'B001': 'info',
     'B002': 'info',
-    'B010': 'select',
+    'B003': 'info',
+    'B004': 'info',
     'B900': 'warn',
-    'I001': 'info'
-  },
+    'I001': 'info',
+    'I002': 'select'
+  }
 }
 
 export default CONST

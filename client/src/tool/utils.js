@@ -8,6 +8,7 @@ class Utils {
   init(manager) {
     let options = {
       timeout: CONST.httpTimeout,
+      withCredentials: true,
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -15,7 +16,6 @@ class Utils {
     }
     if (manager.controller.cors) {
       options.baseURL = CONST.developHost
-      options.withCredentials = true
     }
     this.api = axios.create(options)
     this.event = new Vue()
@@ -53,7 +53,12 @@ class Utils {
         self.event.$emit('LOCK_SCREEN', 'unlock')
         // server error
         if (response.data.error) {
-          self.event.$emit('SHOW_MESSAGE', response.data.error)
+          if (response.data.error == 'B900') {
+            this.router.push({name: 'error'})
+          }
+          else {
+            self.event.$emit('SHOW_MESSAGE', response.data.error)
+          }
         }
         responseData = response.data
       }
@@ -101,7 +106,12 @@ class Utils {
         self.event.$emit('LOCK_SCREEN', 'unlock')
         // server error
         if (response.data.error) {
-          self.event.$emit('SHOW_MESSAGE', response.data.error)
+          if (response.data.error == 'B900') {
+            this.router.push({name: 'error'})
+          }
+          else {
+            self.event.$emit('SHOW_MESSAGE', response.data.error)
+          }
         }
         responseData = response.data
       }
@@ -138,7 +148,12 @@ class Utils {
         self.event.$emit('LOCK_SCREEN', 'unlock')
         // server error
         if (response.data.error) {
-          self.event.$emit('SHOW_MESSAGE', response.data.error)
+          if (response.data.error == 'B900') {
+            this.router.push({name: 'error'})
+          }
+          else {
+            self.event.$emit('SHOW_MESSAGE', response.data.error)
+          }
         }
         responseData = response.data
       }
@@ -176,7 +191,12 @@ class Utils {
         self.event.$emit('LOCK_SCREEN', 'unlock')
         // server error
         if (response.data.error) {
-          self.event.$emit('SHOW_MESSAGE', response.data.error)
+          if (response.data.error == 'B900') {
+            this.router.push({name: 'error'})
+          }
+          else {
+            self.event.$emit('SHOW_MESSAGE', response.data.error)
+          }
         }
         responseData = response.data
       }
