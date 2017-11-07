@@ -5,7 +5,7 @@ import utils from './utils.js'
 import Client from './socketClient.js'
 import Room from './socketRoom.js'
 
-class roomService {
+class RoomService {
   constructor() {
     this.lobby = new Room('lobby')
     this.chatRoom = new Room('chatroom')
@@ -39,4 +39,4 @@ class roomService {
   }
 }
 
-export default new roomService()
+export default new RoomService()

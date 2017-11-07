@@ -2,7 +2,7 @@ import conf from 'config'
 import logger from './logger.js'
 import roomService from './roomService.js'
 
-class socketRouter {
+class SocketRouter {
   constructor() {
     this.io = null
   }
@@ -54,7 +54,7 @@ class socketRouter {
   }
 }
 
-export default new socketRouter()
+export default new SocketRouter()
 
 
 

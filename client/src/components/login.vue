@@ -6,7 +6,7 @@
           VueSample
         </div>
         <div class="login-box-body">
-          <p class="login-box-msg">Sign in to start application</p>
+          <p class="login-box-msg">Login to start application</p>
           <div class="form-group has-feedback">
             <input id="login-user" v-model="manager.user._id" type="text" class="form-control" placeholder="User">
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -20,7 +20,7 @@
               <router-link to="/register">Register a new membership</router-link>
             </div>
             <div class="col-xs-4">
-              <button type="submit" class="btn btn-primary btn-block btn-flat" v-on:click="login">Sign In</button>
+              <button type="submit" class="btn btn-primary btn-block btn-flat" v-on:click="login">Login</button>
             </div>
           </div>
         </div>

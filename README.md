@@ -14,13 +14,11 @@ google and install git
 
 google and install node.js(version >= 8.4)
 
-google and install python (version must be 2.7.x)
+google and install python(version must be 2.7.x)
 
 install mongodb from https://www.mongodb.com/download-center#community
 
 i recommend to use this IDE: https://studio3t.com/
-
-install python 2.7
 
 ## 2. use git and npm to download all library
 
@@ -70,11 +68,11 @@ NODE_ENV=development ./node_modules/.bin/babel-node app.js
 
 ## 2.2. if windows
 
-add `NODE_ENV`(value should be development or production) to your system environment. and then add /yourpath/vue-sample/server/node_modules/.bin/ to `PATH`.
+add `NODE_ENV`(value should be development or production) to your system environment.
 
 ``` bash
 cd vue-sample/server
-babel-node app.js
+npm run dev
 ```
 
 ## 3. deploy

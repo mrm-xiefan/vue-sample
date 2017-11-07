@@ -5,7 +5,7 @@ import mkdirp from 'mkdirp'
 import moment from 'moment'
 import logger from './logger.js'
 
-class utils {
+class Utils {
   constructor() {
   }
   isFileExist(filename) {
@@ -107,4 +107,4 @@ class utils {
   }
 }
 
-export default new utils()
+export default new Utils()

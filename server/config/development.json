@@ -14,7 +14,6 @@
   },
   "session": {
     "mode": "mongo",
-    "mongodb": "session",
     "redisHost": "",
     "redisPort": 6379,
     "redisdb": 0,

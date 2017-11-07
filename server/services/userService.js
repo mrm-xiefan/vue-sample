@@ -3,7 +3,7 @@ import logger from './logger.js'
 import conf from 'config'
 import mongo from './mongo.js'
 
-class userService {
+class UserService {
   constructor() {
   }
   recordLogin(req, next) {
@@ -83,4 +83,4 @@ class userService {
   }
 }
 
-export default new userService()
+export default new UserService()

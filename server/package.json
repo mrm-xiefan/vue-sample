@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "xiefan",
   "scripts": {
-    "start": "babel-node app.js"
+    "dev": "babel-node app.js"
   },
   "dependencies": {
     "aws-sdk": "^2.104.0",
