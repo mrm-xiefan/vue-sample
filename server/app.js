@@ -13,6 +13,7 @@ import utils from './services/utils.js'
 import httpRouter from './services/httpRouter.js'
 import socketRouter from './services/socketRouter.js'
 import userService from './services/userService.js'
+import dataService from './services/dataService.js'
 
 logger.info('NODE_ENV:', process.env.NODE_ENV)
 logger.info('session mode:', conf.session.mode)
@@ -159,6 +160,45 @@ app.get('/static/*', (req, res) => {
 
 
 
+app.post('/uploadFiles', (req, res, next) => {
+  logger.info('uploadFiles')
+  dataService.uploadFiles(req, (error, list, params) => {
+    if (!error) {
+      logger.info('upload end: ' + JSON.stringify(list))
+      logger.info('params: '+JSON.stringify(params))
+      let files = []
+      for (let i = 0; i < list.length; i ++) {
+        if (conf.s3.mode == 'local') {
+          files.push({
+            file: conf.endpoint + 'static/upload/' + list[i].folder + '/' + list[i].name,
+            thumbnail: list[i].thumbnail? (conf.endpoint + 'static/upload/' + list[i].folder + '/' + list[i].thumbnail): null,
+            folder: list[i].folder,
+            name: list[i].name,
+            type: list[i].type,
+            size: list[i].size
+          })
+        }
+        else {
+          files.push({
+            file: '/static/s3/upload/' + list[i].folder + '/' + list[i].name,
+            thumbnail: list[i].thumbnail? ('/static/s3/upload/' + list[i].folder + '/' + list[i].thumbnail): null,
+            folder: list[i].folder,
+            name: list[i].name,
+            type: list[i].type,
+            size: list[i].size
+          })
+        }
+      }
+      res.json({error: null, data: files})
+    }
+    else {
+      res.json({error: error, data: null})
+    }
+  })
+})
+
+
+
 
 // app.get('/', (req, res) => {})
 app.use(express.static(path.join(__dirname, '..', 'dist')))
@@ -210,7 +250,6 @@ app.get('/logout', (req, res) => {
   if (req.session) {
     req.session.destroy()
   }
-  logger.debug('logouted:', JSON.stringify(req.session))
   res.json({error: null, data: {}})
 })
 

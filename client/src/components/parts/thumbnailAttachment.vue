@@ -69,7 +69,7 @@
       else {
         uploadUrl = '/'
       }
-      uploadUrl += 'api/uploadFiles'
+      uploadUrl += 'uploadFiles'
       let initialPreview = []
       $('#thumbnail-attachment').fileinput(
         {

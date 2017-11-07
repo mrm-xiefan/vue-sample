@@ -25,12 +25,22 @@ let preloadApp2 = (to, from, next) => {
   }
   next()
 }
+let logout = (to, from, next) => {
+  utils.restGet('/logout').then(
+    response => {
+      if (response) {
+        utils.router.push({name: 'login'})
+      }
+    }
+  )
+}
 
 export default new Router({
   routes: [
     {name: 'loading', path: '/', component: loading},
     {name: 'login', path: '/login', component: login},
     {name: 'register', path: '/register', component: register},
+    {name: 'logout', path: '/logout', beforeEnter: logout},
     {name: 'error', path: '/error', component: error},
     {name: 'app1', path: '/app1', component: app1, beforeEnter: preloadApp1},
     {name: 'app2', path: '/app2', component: app2, beforeEnter: preloadApp2},

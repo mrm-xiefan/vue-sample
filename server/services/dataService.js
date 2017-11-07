@@ -31,8 +31,8 @@ class dataService {
 
     form.on('fileBegin', (field, file) => {
       let folder = uuid.v4()
-      file.path = path.join(__dirname, 'upload', folder, file.name)
-      fs.mkdirSync(path.join(__dirname, 'upload', folder))
+      file.path = path.join(__dirname, '..', 'upload', folder, file.name)
+      fs.mkdirSync(path.join(__dirname, '..', 'upload', folder))
       localFileList.push({
         fullname: file.path,
         folder: folder,
@@ -93,7 +93,7 @@ class dataService {
     if (needThumbnail) {
       if (os.arch() == 'x64') {
         let thumbnailName = path.basename(localFileList[idx].name, path.extname(localFileList[idx].name)) + '_small' + '.jpg'
-        let thumbnailFullname = path.join(__dirname, 'upload', localFileList[idx].folder, thumbnailName)
+        let thumbnailFullname = path.join(__dirname, '..', 'upload', localFileList[idx].folder, thumbnailName)
         sharp(localFileList[idx].fullname)
           .rotate()
           .resize(500)
@@ -177,7 +177,7 @@ class dataService {
               return
             }
             else {
-              fs.rmdir(path.join(__dirname, 'upload', fileList[idx].folder), (del_error) => {
+              fs.rmdir(path.join(__dirname, '..', 'upload', fileList[idx].folder), (del_error) => {
                 if (del_error) {
                   logger.error(fileList[idx].folder, "|", JSON.stringify(del_error))
                 }
@@ -187,7 +187,7 @@ class dataService {
           })
         }
         else {
-          fs.rmdir(path.join(__dirname, 'upload', fileList[idx].folder), (del_error) => {
+          fs.rmdir(path.join(__dirname, '..', 'upload', fileList[idx].folder), (del_error) => {
             if (del_error) {
               logger.error(fileList[idx].folder, "|", JSON.stringify(del_error))
             }
@@ -202,7 +202,7 @@ class dataService {
       next(null)
       return
     }
-    let sourceFile = path.join(__dirname, 'upload', folder, filename)
+    let sourceFile = path.join(__dirname, '..', 'upload', folder, filename)
     s3.putObject({
       Bucket: conf.s3.bucket,
       Key: path.join(conf.s3.upload, folder, filename),

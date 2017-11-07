@@ -37,14 +37,9 @@
       uploadModal: uploadModal,
       appControlPanel: appControlPanel
     },
-    created() {
-      utils.event.$on('SOCKET_INITIALIZE', () => {
-        utils.socketEmit('enterLobby', {})
-      })
-    },
     mounted() {
       utils.socketEmit('enterLobby', {})
-    },
+    }
   }
 </script>
 

@@ -20,6 +20,8 @@ install mongodb from https://www.mongodb.com/download-center#community
 
 i recommend to use this IDE: https://studio3t.com/
 
+install python 2.7
+
 ## 2. use git and npm to download all library
 
 ``` bash
@@ -28,10 +30,20 @@ git clone https://github.com/mrm-xiefan/vue-sample
 
 # install frontend dependencies
 cd vue-sample/client
+# take care of these packages
+npm install admin-lte@2.4.0
+npm install bootstrap-fileinput@4.4.2
+npm install socket.io@1.4.5
+# and install others
 npm install
 
 # install backend dependencies
 cd vue-sample/server
+# if your system is 32bit
+# delete sharp in package.json!!!
+# take care of these packages
+npm install socket.io@1.4.5
+# and install others
 npm install
 
 # install pm2 in global

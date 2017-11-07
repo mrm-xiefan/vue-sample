@@ -67,13 +67,14 @@
         utils.restGet('/manualLogin', {_id: manager.user._id, password: manager.user.password}).then(
           response => {
             if (response) {
-              manager.login(response)
-              if (path) {
-                self.$router.push({path: path})
-              }
-              else {
-                self.$router.push({name: CONST.defaultApp})
-              }
+              manager.login(response, () => {
+                if (path) {
+                  self.$router.push({path: path})
+                }
+                else {
+                  self.$router.push({name: CONST.defaultApp})
+                }
+              })
             }
           }
         )

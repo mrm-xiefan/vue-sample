@@ -12,9 +12,9 @@ class Manager {
     this.oldsocket = null
   }
 
-  login(data) {
+  login(data, next) {
     this.user.login(data.user)
-    this.initSocket()
+    this.initSocket(next)
   }
   logout() {
     this.user.logout()
@@ -22,7 +22,7 @@ class Manager {
       this.socket.disconnect()
     }
   }
-  initSocket() {
+  initSocket(next) {
     let self = this
     if (self.controller.cors) {
       self.socket = io(CONST.developHost, {path: CONST.socketpath, forceNew: true})
@@ -36,7 +36,7 @@ class Manager {
         utils.socketEmit('reinit', {oldsocket: self.oldsocket, user: self.user._id})
       }
       self.oldsocket = self.socket.id
-      utils.event.$emit('SOCKET_INITIALIZE')
+      next()
     })
     self.socket.on('disconnect', () => {
       // utils.event.$emit('SHOW_MESSAGE', 'S005')
@@ -48,7 +48,6 @@ class Manager {
       utils.router.push({name: 'error'})
     })
     self.socket.on('reinited', () => {
-      utils.event.$emit('SOCKET_INITIALIZE')
       // utils.event.$emit('SHOW_MESSAGE', 'I001')
     })
   }

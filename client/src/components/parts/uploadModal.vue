@@ -51,7 +51,7 @@
       else {
         uploadUrl = '/'
       }
-      uploadUrl += 'api/uploadFiles'
+      uploadUrl += 'uploadFiles'
       $('#upload-input').fileinput(
         {
           uploadUrl: uploadUrl,

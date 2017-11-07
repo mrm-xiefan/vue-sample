@@ -25,13 +25,14 @@
         response => {
           if (response) {
             if (response.user) {
-              manager.login(response)
-              if (path) {
-                self.$router.push({path: path})
-              }
-              else {
-                self.$router.push({name: CONST.defaultApp})
-              }
+              manager.login(response, () => {
+                if (path) {
+                  self.$router.push({path: path})
+                }
+                else {
+                  self.$router.push({name: CONST.defaultApp})
+                }
+              })
             }
             else {
               self.$router.push({name: 'login', query: {path: path}})

@@ -6,10 +6,8 @@
           <img src="../assets/avatar.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>someone's name</p>
-          <a href="#" v-if="manager.socket && manager.socket.connected"><i class="fa fa-circle text-success"></i> Online</a>
-          <a href="#" v-else><i class="fa fa-circle text-danger"></i> Offline</a>
-          <span class="small" v-if="manager.socket">{{manager.socket.id}}</span>
+          <p>{{manager.user._id}}</p>
+          <router-link to="/logout" class="text-red"><i class="glyphicon glyphicon-log-out"></i> Logout</router-link>
         </div>
       </div>
       <ul id='side-menu-tree' class="sidebar-menu" data-widget="tree">

@@ -41,9 +41,6 @@
     },
     created() {
       let self = this
-      utils.event.$on('SOCKET_INITIALIZE', () => {
-        utils.socketEmit('enterChatRoom', {})
-      })
       utils.event.$on('SWITCH_OBJECT', (object) => {
         self.object.sample = object.sample
       })
@@ -51,6 +48,9 @@
     mounted() {
       utils.socketEmit('enterChatRoom', {})
     },
+    beforeDestroy() {
+      utils.event.$off('SWITCH_OBJECT')
+    }
   }
 </script>
 
