@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'lock-screen-hide': locker == 'unlock', 'lock-screen-show': locker == 'lock'}">
+  <div :class="{'lock-screen-hide': manager.locker == 'unlock', 'lock-screen-show': manager.locker == 'lock'}">
     <div class="load-animation">
       <div class="bar bar1"></div>
       <div class="bar bar2"></div>
@@ -17,15 +17,10 @@
 
   export default {
     props: ['manager'],
-    data() {
-      return {
-        locker: 'unlock'
-      }
-    },
     mounted() {
       let self = this
       utils.event.$on('LOCK_SCREEN', (locker) => {
-        self.locker = locker
+        manager.locker = locker
       })
     },
     beforeDestroy() {

@@ -309,6 +309,9 @@ class Utils {
       return replacedNum + ' MB'
     }
   }
+  clone(orig) {
+    return Object.assign(Object.create(Object.getPrototypeOf(orig)), orig)
+  }
 }
 
 export default new Utils()

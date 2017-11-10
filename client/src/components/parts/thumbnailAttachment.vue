@@ -84,7 +84,7 @@
           // previewFileType: 'any',
           showCaption: false,
           showUpload: false,
-          // showRemove: false,
+          showRemove: false,
           // showCancel: false,
           showClose: false,
           showBrowse: true,
@@ -93,7 +93,7 @@
           // previewFileIcon: '<i class="fa fa-file"></i>',
           browseIcon: '<i class="fa fa-folder-open-o"></i>',
           browseLabel: 'Browse',
-          browseClass: 'btn btn-default',
+          browseClass: 'btn btn-default btn-flat full-width',
           removeIcon: '<i class="fa fa-trash"></i>',
           removeLabel: 'Clear',
           removeClass: 'btn btn-default',
@@ -124,7 +124,7 @@
             actionDelete: '<button type="button" class="kv-file-remove btn btn-default" {dataUrl} {dataKey}><i class="fa fa-trash-o"></i> Remove</button>',
             // actionUpload: ''
             preview:
-              '<div class="file-preview" style="min-height: 205px; width: 100%; border-radius: 5px; border: 1px solid #ddd; padding: 5px; margin-bottom: 5px;">\n' +
+              '<div class="file-preview" style="min-height: 205px; width: 100%; border: 1px solid #ddd; border-bottom: none;">\n' +
                 '{close}' +
                 '<div class="{dropClass}" style="font-size: 20px; min-height: 205px; padding: 0px; border: none; height: 100%; text-align: center; vertical-align: middle;">\n' +
                   '<div class="file-preview-thumbnails" style="font-size: 14px; overflow: hidden; width: 100%;">\n' +
@@ -199,6 +199,8 @@
   }
 </script>
 
-<style scoped>
-
+<style>
+  .full-width {
+    width: 100%;
+  }
 </style>
