@@ -1,3 +1,41 @@
+# 20180410
+
+this project is perfect running, but i deepened my understanding of vue.js and found some better approach now.
+
+i won't update this repository any more. but in another project, i will improve these points.
+
+## use sub router
+
+loading, error, login, and app body should be main routes. all business component should be sub routes.
+
+## use enviroment
+
+controller.cors is a mistake. i should use enviroment.
+
+## use material design
+
+material design is awesome!
+
+## jquery is realy not so important for me now
+
+i am still using jquery as so much libraries are based jquery. but i use them just for some better presentation. like carousel, some animation. i belive jquery will completely dead in 2018 (for me).
+
+## service and model in angular2 is fit for me
+
+i will change manager/models to services/models. i hate vuex(just because i can't understand it)!
+
+## write my own file uploader
+
+use axios to upload files. with material design's ui.
+
+## server side refactoring
+
+add router folder, update socket.io, mongodb, log4js. maybe i will use GCP...
+
+## anonymous login
+
+so many changes in both front and back...
+
 # a sample project with vue.js frontend and node.js backend.
 
 frontend use jquery, adminlte(not vue-adminlte), vue-router(to make SPA). with out vuex.(i don't like flux.)
