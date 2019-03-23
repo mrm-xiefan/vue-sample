@@ -1,3 +1,5 @@
+a1
+
 # 20180410
 
 this project is perfect running, but i deepened my understanding of vue.js and found some better approach now.
