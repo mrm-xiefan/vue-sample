@@ -1,8 +1,3 @@
-a3
-a4
-a2
-a5
-
 # 20180410
 
 this project is perfect running, but i deepened my understanding of vue.js and found some better approach now.
